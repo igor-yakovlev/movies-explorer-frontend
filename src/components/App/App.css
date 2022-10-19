@@ -1,0 +1,21 @@
+.page {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+.title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  color: #000000;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 70px;
+}
+
+

@@ -1,0 +1,27 @@
+.header {
+  margin: 0;
+  padding: 18px 70px 38px 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  margin: 0;
+  padding: 0;
+}
+
+.header__wrapper {
+  display: flex;
+}
+
+.header__link {
+  margin: 0;
+  padding: 8px 20px;
+  background: #2BE080;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
