@@ -8,10 +8,10 @@ const Header = ({}) => {
     <header className="header">
       <img src={logo} alt="Логотип" className='header__logo'/>
       <nav className="header__navigation">
-        <Link className="header__link" to={"/register"}>
+        <Link className="header__link" to={"/signup"}>
           Регистрация
         </Link>
-        <Link className="header__link header__link_active" to={"/login"}>
+        <Link className="header__link header__link_active" to={"/signin"}>
           Войти
         </Link>
       </nav>
