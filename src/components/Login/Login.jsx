@@ -1,6 +1,6 @@
 import React from 'react';
 import './Login.css';
-import logo from "../../images/header__logo/logo.svg";
+import logo from "../../images/header/logo.svg";
 import {Link} from "react-router-dom";
 
 const Login = ({}) => {

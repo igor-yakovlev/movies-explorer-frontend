@@ -47,9 +47,8 @@
 .searchForm__wrapper {
   display: flex;
   align-items: center;
-  height: 100%;
   border-left: 1px solid #E8E8E8;
-  padding-left: 29px;
+  padding: 10px 0 10px 29px;
 }
 
 .searchForm__text {
