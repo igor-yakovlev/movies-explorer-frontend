@@ -20,7 +20,7 @@ const Login = ({}) => {
             </div>
             <button className="form__button">Войти</button>
             <div className="form__text">Ещё не зарегистрированы?
-              <Link to={"/register"} className='form__link'> Регистрация</Link>
+              <Link to={"/signup"} className='form__link'> Регистрация</Link>
             </div>
           </form>
         </div>

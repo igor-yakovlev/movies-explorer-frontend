@@ -25,7 +25,7 @@ const Register = ({}) => {
               </div>
               <button className="form__button">Зарегистрироваться</button>
               <div className="form__text">Уже зарегистрированы?
-                <Link to={"/login"} className='form__link'> Войти</Link>
+                <Link to={"/signin"} className='form__link'> Войти</Link>
               </div>
             </form>
           </div>
