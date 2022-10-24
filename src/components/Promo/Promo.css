@@ -19,3 +19,17 @@
   letter-spacing: -0.04em;
   margin-bottom: 151px;
 }
+
+@media screen and (max-width: 768px) {
+  .promo {
+    margin: 0 20px;
+    padding: 350px 0px 30px 0px;
+  }
+  .promo__title {
+    font-size: 40px;
+    line-height: 52px;
+    letter-spacing: -0.04em;
+    margin-bottom: 314px;
+  }
+}
+

@@ -1,6 +1,6 @@
 .aboutProject {
   margin: 0;
-  padding: 110px 70px 110px 70px;
+  padding: 110px 70px;
 }
 
 .aboutProject__title {
@@ -60,4 +60,11 @@
   line-height: 17px;
   color: #A0A0A0;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutProject {
+    margin: 0;
+    padding: 110px 50px;
+  }
 }

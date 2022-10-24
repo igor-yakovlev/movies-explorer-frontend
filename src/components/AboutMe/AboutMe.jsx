@@ -20,7 +20,7 @@ const AboutMe = ({}) => {
           <a href="https://vk.com/id66345979" target={"_blank"} className="aboutMe__link">Вконтакте</a>
           <a href="https://github.com/igor-yakovlev" target={"_blank"} className="aboutMe__link">Github</a>
         </div>
-        <img src={photo} alt="Моя фотография" className="aboutMe__img"/>
+        <img src={photo} alt="Фотография пользователя" className="aboutMe__img"/>
       </div>
       <h3 className="aboutMe__portfolio-title">Портфолио</h3>
       <ul className="aboutMe__portfolio-items">

@@ -3,3 +3,9 @@
   margin: 0 70px;
   padding-top: 70px;
 }
+
+@media screen and (max-width: 768px) {
+  .movies {
+    margin: 0 30px;
+  }
+}

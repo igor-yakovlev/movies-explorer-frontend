@@ -9,7 +9,7 @@ const Footer = ({}) => {
             <p className="footer__copyright">&copy; 2022</p>
             <nav className="footer__links">
               <a href="https://practicum.yandex.ru/" target={"_blank"} className="footer__link">Яндекс.Практикум</a>
-              <a href="https://github.com/yandex-praktikum?tab=repositories" target={"_blank"} className="footer__link">Github</a>
+              <a href="https://github.com/igor-yakovlev" target={"_blank"} className="footer__link">Github</a>
             </nav>
           </div>
         </footer>
