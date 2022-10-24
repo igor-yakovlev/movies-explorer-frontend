@@ -27,6 +27,7 @@
 }
 
 .aboutProject__descr-title {
+  margin: 0 0 26px 0;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
@@ -44,8 +45,8 @@
 }
 
 .aboutProject__progress-title {
+  margin: 0 0 14px 0;
   padding: 9px 0;
-  margin-bottom: 23px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;

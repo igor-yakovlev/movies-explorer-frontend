@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './Profile.css';
+import FormButton from "../FormButton/FormButton";
 
 const Profile = ({}) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -21,13 +22,13 @@ const Profile = ({}) => {
           <label htmlFor="email" className="profile__label">
             E-mail
           </label>
-            <input type="text" id={'email'} disabled={!isEditing} value={'pochta@yandex.ru'} className="profile__input"/>
+          <input type="text" id={'email'} disabled={!isEditing} value={'pochta@yandex.ru'} className="profile__input"/>
         </div>
         <div className="profile__button-container">
           {isEditing ?
             <>
-              <button className="profile__button-save">Сохранить</button>
-          </>
+              <FormButton>Сохранить</FormButton>
+            </>
             :
             <>
               <button className="profile__button" onClick={handleEditing}>Редактировать</button>

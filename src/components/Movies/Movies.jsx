@@ -6,14 +6,23 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 const Movies = ({}) => {
     return (
-        <div className='movies'>
+        <section className='movies'>
           <SearchForm placeholder={'Фильмы'}/>
           <MoviesCardList>
             <MoviesCard/>
             <MoviesCard/>
             <MoviesCard/>
+            <MoviesCard/>
+            <MoviesCard/>
+            <MoviesCard/>
+            <MoviesCard/>
+            <MoviesCard/>
+            <MoviesCard/>
+            <MoviesCard/>
+            <MoviesCard/>
+            <MoviesCard/>
           </MoviesCardList>
-        </div>
+        </section>
     )
 }
 

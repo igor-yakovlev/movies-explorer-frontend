@@ -2,6 +2,8 @@ import React from 'react';
 import './Register.css';
 import logo from "../../images/header/logo.svg";
 import {Link} from "react-router-dom";
+import FormInput from "../FormInput/FormInput";
+import FormButton from "../FormButton/FormButton";
 
 
 const Register = ({}) => {
@@ -11,21 +13,14 @@ const Register = ({}) => {
             <img src={logo} alt="Логотип" className='register__logo'/>
             <h2 className="register__title">Добро пожаловать!</h2>
             <form action="#" className="register__form form">
-              <div className="form__input-wrapper">
-                <label htmlFor="name" className="form__label">Имя</label>
-                <input type="text" className="form__input" id={'name'}/>
+              <FormInput type={'text'} label={'Имя'} name={'name'}/>
+              <FormInput type={'email'} label={'E-mail'} name={'email'}/>
+              <FormInput type={'password'} label={'Пароль'} name={'password'}/>
+              <div className="register__form-wrapper">
+                <FormButton>Зарегистрироваться</FormButton>
               </div>
-              <div className="form__input-wrapper">
-                <label htmlFor="email" className="form__label">E-mail</label>
-                <input type="email" className="form__input" id={'email'}/>
-              </div>
-              <div className="form__input-wrapper">
-                <label htmlFor="password" className="form__label">Пароль</label>
-                <input type="password" className="form__input" id={'password'}/>
-              </div>
-              <button className="form__button">Зарегистрироваться</button>
-              <div className="form__text">Уже зарегистрированы?
-                <Link to={"/signin"} className='form__link'> Войти</Link>
+              <div className="register__text">Уже зарегистрированы?
+                <Link to={"/signin"} className='register__link'> Войти</Link>
               </div>
             </form>
           </div>
