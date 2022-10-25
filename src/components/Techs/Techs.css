@@ -59,6 +59,21 @@
 }
 
 @media screen and (max-width: 768px) {
+  .techs {
+    padding: 90px 50px;
+    background: #F5F5F5;
+  }
+  .techs__title {
+    margin-bottom: 80px;
+  }
+  .techs__subtitle {
+    margin-bottom: 22px;
+  }
+  .techs__descr {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 83px;
+  }
   .techs__items {
     grid-template-columns: repeat(7, 84px);
   }

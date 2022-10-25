@@ -92,7 +92,7 @@
 @media screen and (max-width: 768px) {
   .aboutMe {
     margin: 0;
-    padding: 110px 50px 125px 50px;
+    padding: 90px 50px;
   }
 
   .aboutMe__img {
@@ -111,10 +111,12 @@
     font-size: 12px;
     line-height: 18px;
   }
-
   .aboutMe__wrapper {
     display: grid;
     grid-template-columns: 364px 255px;
     gap: 49px;
+  }
+  .aboutMe__portfolio-item {
+    font-size: 28px;
   }
 }

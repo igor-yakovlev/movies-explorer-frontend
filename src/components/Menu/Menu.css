@@ -14,8 +14,8 @@
 }
 
 .menu__container {
-  width: 35vh;
-  transform: translate(35vh, 0);
+  width: 520px;
+  transform: translate(520px, 0);
   background: #FFFFFF;
   padding: 22px;
   display: flex;
@@ -44,7 +44,41 @@
 
 .menu__navigation {
   width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 137px;
+}
+
+.menu__navigation-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.menu__link {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.active {
+  border-bottom: 2px solid #000000;
+}
+
+.menu__account-link {
+  justify-self: flex-end;
+  padding: 8px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+  background: #F9F9F9;
+  border-radius: 20px;
+  margin-bottom: 68px;
 }
