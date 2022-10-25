@@ -46,3 +46,29 @@
     padding: 80px 37px 20px 30px;
   }
 }
+@media screen and (max-width: 320px){
+  .footer {
+    flex-shrink: 0;
+    padding: 80px 10px 37px 10px;
+  }
+  .footer__descr {
+    font-size: 12px;
+    line-height: 15px;
+    border-bottom: 1px solid #E8E8E8;
+  }
+  .footer_wrapper {
+    margin-top: 30px;
+    display: flex;
+    gap: 30px;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+  }
+}

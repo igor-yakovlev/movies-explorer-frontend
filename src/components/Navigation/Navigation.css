@@ -77,3 +77,19 @@
     display: block;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .navigation__film-wrapper {
+    visibility: hidden;
+  }
+  .navigation__account-link {
+    display: none;
+  }
+  .navigation__menu-button {
+    display: block;
+  }
+  .navigation__menu-button {
+    width: 40px;
+    height: 43px;
+  }
+}

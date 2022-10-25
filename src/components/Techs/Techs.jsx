@@ -7,7 +7,7 @@ const Techs = ({}) => {
       <h2 className="techs__title">Технологии</h2>
       <div className="techs__wrapper">
         <h2 className="techs__subtitle">7 технологий</h2>
-        <p className="techs__descr">На курсе веб-разработки мы освоили технологии, которые применили<br/> в дипломном
+        <p className="techs__descr">На курсе веб-разработки мы освоили технологии, которые применили в дипломном
           проекте.</p>
         <ul className="techs__items">
           <li className="techs__item">HTML</li>

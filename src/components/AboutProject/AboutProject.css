@@ -72,3 +72,40 @@
     margin: 0 0 93px 0;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .aboutProject {
+    margin: 0;
+    padding: 70px 15px;
+  }
+  .aboutProject__title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+    margin-bottom: 60px;
+  }
+  .aboutProject__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .aboutProject__wrapper{
+    margin: 0 0 60px 0;
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+  .aboutProject__descr-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .aboutProject__progress-title {
+    padding: 11px 10px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+  .aboutProject__progress-descr {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

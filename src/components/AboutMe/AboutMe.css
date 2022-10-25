@@ -38,8 +38,7 @@
 }
 
 .aboutMe__wrapper {
-  display: grid;
-  grid-template-columns: 600px auto;
+  display: flex;
   gap: 270px;
 }
 
@@ -118,5 +117,45 @@
   }
   .aboutMe__portfolio-item {
     font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .aboutMe {
+    margin: 0;
+    padding: 70px 14px;
+  }
+  .aboutMe__title-main {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+    margin-bottom: 60px;
+  }
+
+  .aboutMe__wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+  .aboutMe__img {
+    width: 100%;
+  }
+  .aboutMe__paragraph {
+    margin-bottom: 40px;
+  }
+  .aboutMe__portfolio-title {
+    margin-top: 69px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .aboutMe__portfolio-item {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .aboutMe__portfolio-link {
+    font-size: 18px;
+    line-height: 28px;
   }
 }

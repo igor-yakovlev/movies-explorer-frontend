@@ -18,8 +18,8 @@ const AboutProject = ({}) => {
         </div>
       </div>
       <div className="aboutProject__progress">
-        <div className="aboutProject__progress-item" style={{width: '20%'}}>
-          <h3 className='aboutProject__progress-title'>1 неделя</h3>
+        <div className="aboutProject__progress-item" style={{width: '25%'}}>
+            <h3 className='aboutProject__progress-title'>1 неделя</h3>
           <p className='aboutProject__progress-descr'>Back-end</p>
         </div>
         <div className="aboutProject__progress-item" style={{width: '80%'}}>
