@@ -88,3 +88,16 @@
 .profile__button-save:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding-top: 216px;
+  }
+  .profile__button-container {
+    margin-top: 210px;
+  }
+  .profile__title {
+    margin-bottom: 96px;
+  }
+
+}

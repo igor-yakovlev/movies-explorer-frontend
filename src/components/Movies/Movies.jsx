@@ -3,6 +3,7 @@ import './Movies.css';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import MoviesButton from "../MoviesButton/MoviesButton";
 
 const Movies = ({}) => {
   return (
@@ -17,11 +18,10 @@ const Movies = ({}) => {
         <MoviesCard/>
         <MoviesCard/>
         <MoviesCard/>
-        <MoviesCard/>
-        <MoviesCard/>
-        <MoviesCard/>
-        <MoviesCard/>
       </MoviesCardList>
+      <div className="movies__wrapper">
+        <MoviesButton>Ещё</MoviesButton>
+      </div>
     </section>
   )
 }

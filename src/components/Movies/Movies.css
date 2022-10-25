@@ -4,8 +4,15 @@
   padding-top: 70px;
 }
 
+.movies__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
   .movies {
     margin: 0 30px;
+    padding-top: 60px;
   }
 }

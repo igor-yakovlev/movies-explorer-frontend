@@ -11,8 +11,8 @@
 
 @media screen and (max-width: 768px) {
   .moviesCardList {
+    margin-top: 109px;
     grid-template-columns: repeat(auto-fit, 339px);
     grid-template-rows: repeat(auto-fit, minmax(271px, 271px));
-    gap: 36px 30px;
   }
 }
