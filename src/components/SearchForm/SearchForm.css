@@ -46,14 +46,24 @@
   align-items: center;
   cursor: pointer;
   margin-right: 30px;
+  transition: 0.8s ease;
 }
+
+.searchForm__button:focus {
+  background: #3d4c95;
+}
+
+
 
 .searchForm__button:after {
   content: '';
   background-image: url("../../images/searchForm/search__button.svg");
   background-position: center;
   background-repeat: no-repeat;
+}
 
+.searchForm__button:hover {
+  opacity: 0.8;
 }
 
 .searchForm__icon {

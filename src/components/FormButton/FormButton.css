@@ -16,3 +16,7 @@
 .formButton:hover {
   opacity: 0.8;
 }
+
+.formButton:focus {
+  background: #3d4c95;
+}

@@ -41,7 +41,7 @@ const Navigation = ({isLoggedIn}) => {
               <Link to={'/profile'} className="navigation__account-link">
                 Аккаунт
               </Link>
-              <button className={'navigation__menu-button'} onClick={handleOpenMenu}/>
+              <button type={"button"} className={'navigation__menu-button'} onClick={handleOpenMenu}/>
             </div>
           </>
         }

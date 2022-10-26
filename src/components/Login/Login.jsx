@@ -9,7 +9,7 @@ const Login = ({}) => {
     return (
       <div className='login'>
         <div className="login__container">
-          <img src={logo} alt="Логотип" className='login__logo'/>
+          <img src={logo} alt="Logo" className='login__logo'/>
           <h2 className="login__title">Рады видеть!</h2>
           <form action="#" className="login__form">
             <FormInput type={'email'} label={'E-mail'} name={'email'}/>

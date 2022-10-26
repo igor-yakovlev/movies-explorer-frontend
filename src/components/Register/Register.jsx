@@ -10,7 +10,7 @@ const Register = ({}) => {
     return (
         <div className='register'>
           <div className="register__container">
-            <img src={logo} alt="Логотип" className='register__logo'/>
+            <img src={logo} alt="Logo" className='register__logo'/>
             <h2 className="register__title">Добро пожаловать!</h2>
             <form action="#" className="register__form">
               <FormInput type={'text'} label={'Имя'} name={'name'}/>

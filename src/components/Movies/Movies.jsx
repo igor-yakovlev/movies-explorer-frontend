@@ -24,7 +24,7 @@ const Movies = ({}) => {
         </MoviesCardList>
       }
       <div className="movies__wrapper">
-        <MoviesButton>Ещё</MoviesButton>
+        <MoviesButton type={"button"}>Ещё</MoviesButton>
       </div>
     </section>
   )

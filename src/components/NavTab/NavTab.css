@@ -13,9 +13,10 @@
   font-size: 12px;
   line-height: 16px;
   color: #FFFFFF;
+  text-decoration: none;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
   .navTab {
     gap: 6px;
     grid-template-columns: repeat(3, 82px);

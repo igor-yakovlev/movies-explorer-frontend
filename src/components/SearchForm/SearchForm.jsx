@@ -5,10 +5,10 @@ import search from '../../images/searchForm/search_icon.svg'
 
 const SearchForm = ({placeholder, type}) => {
   return (
-    <div className={"searchForm"}>
+    <form className={"searchForm"}>
       <div className="searchForm__container">
-        <img src={search} alt="search" className="searchForm__icon"/>
-        <input type={type} placeholder={placeholder} className={'searchForm__input'}/>
+        <img src={search} alt="Search" className="searchForm__icon"/>
+        <input required={true} type={type} placeholder={placeholder} className={'searchForm__input'}/>
         <button className={"searchForm__button"}></button>
       </div>
       <div className="searchForm__vl-container">
@@ -18,7 +18,7 @@ const SearchForm = ({placeholder, type}) => {
         <FilterCheckbox/>
         <span className={"searchForm__text"}>Короткометражки</span>
       </div>
-    </div>
+    </form>
   )
 }
 

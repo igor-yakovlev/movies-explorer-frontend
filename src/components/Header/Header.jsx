@@ -8,7 +8,7 @@ const Header = ({}) => {
   return (
     <header className="header">
       <Link to={'/'} className='header__logo'>
-        <img src={logo} alt="Логотип"/>
+        <img src={logo} alt="Logo"/>
       </Link>
       <Navigation isLoggedIn={true}/>
     </header>

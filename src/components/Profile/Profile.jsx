@@ -33,8 +33,8 @@ const Profile = ({}) => {
           </>
           :
           <>
-            <button className="profile__button" onClick={handleEditing}>Редактировать</button>
-            <button className="profile__button profile__button_color-red">Выйти из аккаунта</button>
+            <button type={"button"} className="profile__button" onClick={handleEditing}>Редактировать</button>
+            <button type={"button"} className="profile__button profile__button_color-red">Выйти из аккаунта</button>
           </>
         }
       </div>

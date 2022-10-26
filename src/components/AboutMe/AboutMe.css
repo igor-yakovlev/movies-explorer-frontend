@@ -73,9 +73,10 @@
 }
 
 .aboutMe__portfolio-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /*display: flex;*/
+  /*justify-content: space-between;*/
+  /*align-items: center;*/
+  list-style-type: none;
   padding-bottom: 19px;
   border-bottom: 1px solid #E8E8E8;
   margin-bottom: 20px;
@@ -86,6 +87,10 @@
   line-height: 60px;
   letter-spacing: -0.04em;
   color: #000000;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media screen and (max-width: 900px) {

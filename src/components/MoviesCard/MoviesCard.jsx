@@ -20,7 +20,7 @@ const MoviesCard = ({isFavorite = false}) => {
             <h2 className="moviesCard__title">33 слова о дизайне</h2>
             <h3 className="moviesCard__subtitle">1ч 47м</h3>
           </div>
-          <button className={buttonClassName} onClick={() => setActive(!active)}>
+          <button type={'button'} className={buttonClassName} onClick={() => setActive(!active)}>
             <img src={!isFavorite ? imgClassName : buttonIconDelete} alt={"Bookmark"}/>
           </button>
         </div>

@@ -41,6 +41,7 @@
   color: #000000;
   background: #F9F9F9;
   border-radius: 20px;
+  text-decoration: none
 }
 
 .navigation__film-link {
@@ -49,6 +50,7 @@
   line-height: 18px;
   color: #000000;
   margin-right: 16px;
+  text-decoration: none;
 }
 
 .navigation__menu-button {

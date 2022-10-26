@@ -65,6 +65,7 @@
   font-size: 18px;
   line-height: 22px;
   color: #000000;
+  text-decoration: none;
 }
 
 .active {
@@ -81,6 +82,7 @@
   background: #F9F9F9;
   border-radius: 20px;
   margin-bottom: 68px;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {
