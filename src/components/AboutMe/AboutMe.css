@@ -88,7 +88,7 @@
   color: #000000;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .aboutMe {
     margin: 0;
     padding: 90px 50px;
@@ -117,6 +117,14 @@
   }
   .aboutMe__portfolio-item {
     font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .aboutMe__wrapper {
+    display: flex;
+    gap: 40px;
+    flex-direction: column-reverse;
   }
 }
 

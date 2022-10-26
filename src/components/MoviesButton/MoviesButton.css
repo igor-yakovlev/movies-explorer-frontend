@@ -9,6 +9,7 @@
   text-align: center;
   min-width: 320px;
   color: #000000;
+  cursor: pointer;
 }
 
 .moviesButton:hover {

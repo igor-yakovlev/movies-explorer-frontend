@@ -22,12 +22,13 @@
 .profile__input-container {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr;
 }
 
 .profile__label {
   font-weight: 500;
+  width: 100%;
   font-size: 11px;
   line-height: 13px;
 }
@@ -35,6 +36,7 @@
 .profile__input {
   margin: 0;
   padding: 0;
+  width: 100%;
   text-align: right;
   border: none;
   font-weight: 400;
@@ -66,6 +68,11 @@
   line-height: 16px;
   text-align: center;
   margin-bottom: 16px;
+  transition: 0.5s ease;
+}
+
+.profile__button:hover {
+  opacity: 0.7;
 }
 
 .profile__button_color-red {
@@ -85,15 +92,20 @@
   color: #FFFFFF;
 }
 
+.profile__error {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #FF004C;
+  margin-bottom: 20px;
+}
+
 .profile__button-save:hover {
   opacity: 0.8;
 }
 
 @media screen and (max-width: 768px) {
-  .profile {
-    padding-top: 216px;
-  }
-
   .profile__title {
     margin-bottom: 96px;
   }
@@ -102,6 +114,7 @@
 @media screen and (max-width: 420px) {
   .profile {
     padding-top: 70px;
+    justify-content: stretch;
   }
   .profile__wrapper {
     width: 100%;
@@ -110,5 +123,7 @@
   .profile__title {
     margin-bottom: 80px;
   }
-
+  .profile__button-container {
+   padding: 0 30px;
+  }
 }

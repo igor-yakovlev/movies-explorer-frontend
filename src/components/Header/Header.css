@@ -8,6 +8,9 @@
 .header__logo {
   margin: 0 44px 0 0;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
