@@ -1,9 +1,12 @@
 import React from 'react';
 import './SavedMovies.css'
+import SearchForm from "../SearchForm/SearchForm";
 
 const SavedMovies = ({}) => {
     return (
-        <div className={'savedMovies'}></div>
+        <div className={'savedMovies'}>
+          <SearchForm placeholder={'Фильмы'}/>
+        </div>
     )
 }
 

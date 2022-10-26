@@ -1,4 +1,20 @@
 .savedMovies {
   flex-grow: 1;
   margin: 0 70px;
+  padding-top: 70px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .savedMovies {
+    margin: 0 30px;
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .savedMovies {
+    margin: 0 10px;
+    padding-top: 80px;
+  }
 }

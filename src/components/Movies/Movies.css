@@ -16,3 +16,10 @@
     padding-top: 60px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .movies {
+    margin: 0 10px;
+    padding-top: 80px;
+  }
+}

@@ -24,18 +24,18 @@ const Profile = ({}) => {
           </label>
           <input type="text" id={'email'} disabled={!isEditing} value={'pochta@yandex.ru'} className="profile__input"/>
         </div>
-        <div className="profile__button-container">
-          {isEditing ?
-            <>
-              <FormButton>Сохранить</FormButton>
-            </>
-            :
-            <>
-              <button className="profile__button" onClick={handleEditing}>Редактировать</button>
-              <button className="profile__button profile__button_color-red">Выйти из аккаунта</button>
-            </>
-          }
-        </div>
+      </div>
+      <div className="profile__button-container">
+        {isEditing ?
+          <>
+            <FormButton>Сохранить</FormButton>
+          </>
+          :
+          <>
+            <button className="profile__button" onClick={handleEditing}>Редактировать</button>
+            <button className="profile__button profile__button_color-red">Выйти из аккаунта</button>
+          </>
+        }
       </div>
     </div>
   )

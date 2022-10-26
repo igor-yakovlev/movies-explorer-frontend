@@ -12,7 +12,7 @@ const Register = ({}) => {
           <div className="register__container">
             <img src={logo} alt="Логотип" className='register__logo'/>
             <h2 className="register__title">Добро пожаловать!</h2>
-            <form action="#" className="register__form form">
+            <form action="#" className="register__form">
               <FormInput type={'text'} label={'Имя'} name={'name'}/>
               <FormInput type={'email'} label={'E-mail'} name={'email'}/>
               <FormInput type={'password'} label={'Пароль'} name={'password'}/>

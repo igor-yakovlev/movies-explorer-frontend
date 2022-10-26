@@ -8,7 +8,7 @@
 }
 
 .register__container {
-  min-width: 396px;
+  width: 396px;
 }
 
 .register__logo {
@@ -24,6 +24,10 @@
 
 .register__form-wrapper {
   margin-top: 152px;
+}
+
+.register__form {
+  width: 100%;
 }
 
 .register__text {
@@ -43,4 +47,24 @@
   text-decoration: none;
 }
 
+@media screen and (max-width: 320px){
+  .register__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 30px;
+  }
+  .register__title {
+    margin-bottom: 80px;
+  }
+  .register__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .register__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
 

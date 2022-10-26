@@ -12,7 +12,7 @@ const Menu = ({isOpen, closeMenu}) => {
         <button className="menu__close-button" type="button" onClick={handleClose}/>
         <nav className="menu__navigation">
           <div className={'menu__navigation-wrapper'}>
-            <NavLink className="menu__link" to={"/"} activeclass={"active"}>
+            <NavLink end={true} className="menu__link" to={"/"} activeclass={"active"}>
               Главная
             </NavLink>
             <NavLink className="menu__link" to={"/movies"} activeclass={"active"}>

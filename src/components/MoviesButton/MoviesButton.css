@@ -14,3 +14,9 @@
 .moviesButton:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 550px) {
+  .moviesButton {
+    min-width: 240px;
+  }
+}
