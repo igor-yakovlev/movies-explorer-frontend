@@ -1,0 +1,25 @@
+.movies {
+  flex-grow: 1;
+  margin: 0 70px;
+  padding-top: 70px;
+}
+
+.movies__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .movies {
+    margin: 0 30px;
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movies {
+    margin: 0 10px;
+    padding-top: 80px;
+  }
+}
