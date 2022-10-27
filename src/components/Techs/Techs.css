@@ -41,6 +41,7 @@
 }
 
 .techs__items {
+  padding: 0;
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(7, 90px);
@@ -86,7 +87,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
   .techs {
     padding: 70px 18px;
     background: #FFFFFF;

@@ -40,6 +40,7 @@
 .aboutMe__wrapper {
   display: flex;
   gap: 270px;
+  align-items: center;
 }
 
 .aboutMe__link {
@@ -65,6 +66,11 @@
   color: #A0A0A0;
 }
 
+.aboutMe__portfolio-items {
+  margin: 0;
+  padding: 0;
+}
+
 .aboutMe__portfolio-item {
   font-weight: 400;
   font-size: 30px;
@@ -73,9 +79,6 @@
 }
 
 .aboutMe__portfolio-wrapper {
-  /*display: flex;*/
-  /*justify-content: space-between;*/
-  /*align-items: center;*/
   list-style-type: none;
   padding-bottom: 19px;
   border-bottom: 1px solid #E8E8E8;
@@ -117,6 +120,8 @@
   }
   .aboutMe__wrapper {
     display: grid;
+    align-items: center;
+    justify-content: space-between;
     grid-template-columns: 364px 255px;
     gap: 49px;
   }
@@ -127,13 +132,15 @@
 
 @media screen and (max-width: 750px) {
   .aboutMe__wrapper {
-    display: flex;
-    gap: 40px;
-    flex-direction: column-reverse;
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: auto 255px;
+    gap: 49px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 550px) {
   .aboutMe {
     margin: 0;
     padding: 70px 14px;

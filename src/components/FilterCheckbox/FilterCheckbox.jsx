@@ -11,7 +11,8 @@ const FilterCheckbox = ({id, name, htmlFor}) => {
 
   return (
     <div className="filterSwitch">
-      <input type="checkbox" checked={checked} onChange={handleChecked} className="filterSwitch__checkbox" name={name} id={id}/>
+      <input type="checkbox" checked={checked} onChange={handleChecked} className="filterSwitch__checkbox" name={name}
+             id={id}/>
       <label className="filterSwitch__label" htmlFor={htmlFor}>
         <span className="filterSwitch__inner"/>
         <span className="filterSwitch__switch" onClick={handleChecked}/>

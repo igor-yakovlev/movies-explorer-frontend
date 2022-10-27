@@ -34,6 +34,7 @@
   text-align: center;
   margin-bottom: 30px;
   transition: 0.5s ease;
+  text-decoration: none;
 }
 
 .pageNotFound__link:hover {

@@ -25,7 +25,7 @@ const MoviesCard = ({isFavorite = false}) => {
           </button>
         </div>
         <div className="moviesCard__body">
-          <img src={image} alt="" className="moviesCard__image"/>
+          <img src={image} alt="Card image" className="moviesCard__image"/>
         </div>
       </li>
     )
