@@ -4,8 +4,11 @@ import logo from "../../images/header/logo.svg";
 import {Link} from "react-router-dom";
 import FormInput from "../FormInput/FormInput";
 import FormButton from "../FormButton/FormButton";
+import InfoTooltip from "../InfoTooltip/InfoPopup";
 
 const Login = ({}) => {
+
+
     return (
       <div className='login'>
         <div className="login__container">
