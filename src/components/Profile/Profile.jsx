@@ -1,28 +1,47 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Profile.css';
 import FormButton from "../FormButton/FormButton";
+import {CurrentUserContext} from "../../context/CurrentUserContext";
+
+const intialValues = {
+  name: '',
+  email: '',
+}
 
 const Profile = ({}) => {
+  const user = React.useContext(CurrentUserContext);
+  const [value, setValue] = useState(intialValues)
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setValue({name: user.name, email: user.email})
+  }, [user])
+
   const handleEditing = () => {
     setIsEditing(!isEditing);
   }
+
+  const handleChange = ({target}) => {
+    const {name, value} = target
+    setValue(prevState => ({...prevState, [name]: value}))
+  }
+
   return (
     <div className="profile">
       <div className="profile__wrapper">
-        <h2 className={"profile__title"}>Привет, Игорь!</h2>
+        <h2 className={"profile__title"}>Привет, {user.name}!</h2>
         <div className="profile__input-container">
           <label htmlFor="name" className="profile__label">
             Имя
           </label>
-          <input type="text" id={'name'} disabled={!isEditing} value={'Игорь'} className="profile__input"/>
+          <input type="text" id={'name'} disabled={!isEditing} name={'name'} value={value.name} onChange={handleChange} className="profile__input"/>
         </div>
         <hr size={'1px'} color={'#E8E8E8'} width={'100%'} className={'profile__line'}/>
         <div className="profile__input-container">
           <label htmlFor="email" className="profile__label">
             E-mail
           </label>
-          <input type="text" id={'email'} disabled={!isEditing} value={'igor.yakovlev.95@yandex.ru'} className="profile__input"/>
+          <input type="text" id={'email'} disabled={!isEditing} name={'email'} value={value.email} onChange={handleChange} className="profile__input"/>
         </div>
       </div>
       <div className="profile__button-container">

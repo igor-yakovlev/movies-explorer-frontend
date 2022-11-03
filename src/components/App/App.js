@@ -13,6 +13,7 @@ import * as auth from '../../utils/Auth';
 import React, {useCallback, useEffect, useState} from "react";
 import InfoPopup from "../InfoTooltip/InfoPopup";
 import ProtectedRoutes from "../ProtectedRoute/ProtectedRoute";
+import {CurrentUserContext} from "../../context/CurrentUserContext";
 
 
 function App() {
@@ -24,16 +25,19 @@ function App() {
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   const tokenCheck = useCallback(() => {
     const token = localStorage.getItem('token');
     if (token) {
+      setIsLoading(true);
       auth.authorize()
         .then(res => {
-          setIsLoading(true);
           if (res) {
+            const {email, name} = res;
+            setCurrentUser({email, name})
             setIsLoggedIn(true);
-            navigate('/', {replace: true})
+            // navigate('/', {replace: true})
           } else {
             setIsLoggedIn(false);
             localStorage.removeItem('token')
@@ -89,21 +93,23 @@ function App() {
 
   return (
     <div className="page">
-      {pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile' ?
-        <Header loggedIn={isLoggedIn}/> : null}
-      <Routes>
-        <Route path={'/'} element={<Main/>}/>
-        <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
-          <Route path={'/movies'} element={<Movies/>}/>
-          <Route path={'/saved-movies'} element={<SavedMovies/>}/>
-          <Route path={'/profile'} element={<Profile/>}/>
-        </Route>
-        <Route path={"/signup"} element={<Register onRegister={onRegister}/>}/>
-        <Route path={"/signin"} element={<Login onLogin={onLogin}/>}/>
-        <Route path={"*"} element={<PageNotFound/>}/>
-      </Routes>
-      {pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' ? <Footer/> : null}
-      <InfoPopup settings={infoPopupOption} onClose={closePopup}/>
+      <CurrentUserContext.Provider value={currentUser}>
+        {pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile' ?
+          <Header isLoading={isLoading} loggedIn={isLoggedIn}/> : null}
+        <Routes>
+          <Route path={'/'} element={<Main/>}/>
+          <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
+            <Route path={'/movies'} element={<Movies/>}/>
+            <Route path={'/saved-movies'} element={<SavedMovies/>}/>
+            <Route path={'/profile'} element={<Profile/>}/>
+          </Route>
+          <Route path={"/signup"} element={<Register onRegister={onRegister}/>}/>
+          <Route path={"/signin"} element={<Login onLogin={onLogin}/>}/>
+          <Route path={"*"} element={<PageNotFound/>}/>
+        </Routes>
+        {pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' ? <Footer/> : null}
+        <InfoPopup settings={infoPopupOption} onClose={closePopup}/>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
