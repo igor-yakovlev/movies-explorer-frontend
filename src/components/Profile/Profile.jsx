@@ -21,7 +21,7 @@ const validRegConfig = {
   }
 }
 
-const Profile = ({onUpdateUser}) => {
+const Profile = ({onUpdateUser, signOut}) => {
   const user = React.useContext(CurrentUserContext);
   const [values, setValues] = useState(intialValues)
   const [isEditing, setIsEditing] = useState(false);
@@ -66,7 +66,7 @@ const Profile = ({onUpdateUser}) => {
           :
           <>
             <button type={"button"} className="profile__button" onClick={handleEditing}>Редактировать</button>
-            <button type={"button"} className="profile__button profile__button_color-red">Выйти из аккаунта</button>
+            <button type={"button"} className="profile__button profile__button_color-red" onClick={signOut}>Выйти из аккаунта</button>
           </>
         }
       </div>

@@ -104,6 +104,12 @@ function App() {
     setInfoPopupOption((state) => ({...state, popupOpen: false}));
   };
 
+  const signOut = () => {
+    localStorage.removeItem('token')
+    navigate('/', {replace: true})
+    setIsLoggedIn(false);
+  }
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -114,7 +120,7 @@ function App() {
           <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
             <Route path={'/movies'} element={<Movies/>}/>
             <Route path={'/saved-movies'} element={<SavedMovies/>}/>
-            <Route path={'/profile'} element={<Profile onUpdateUser={handleUpdateUser}/>}/>
+            <Route path={'/profile'} element={<Profile onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
           </Route>
           <Route path={"/signup"} element={<Register onRegister={onRegister}/>}/>
           <Route path={"/signin"} element={<Login onLogin={onLogin}/>}/>
