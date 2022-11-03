@@ -1,9 +1,9 @@
 import React from 'react';
 import './FormButton.css';
 
-const FormButton = ({children}) => {
+const FormButton = ({children, disabled}) => {
   return (
-    <button className="formButton">{children}</button>
+    <button disabled={disabled} className="formButton">{children}</button>
   )
 }
 

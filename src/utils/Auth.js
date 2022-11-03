@@ -46,7 +46,7 @@ export const login = (email, password) => {
     })
 }
 
-export const authorize = (token) => {
+export const authorize = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {

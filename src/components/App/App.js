@@ -12,6 +12,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import * as auth from '../../utils/Auth';
 import React, {useCallback, useEffect, useState} from "react";
 import InfoPopup from "../InfoTooltip/InfoPopup";
+import ProtectedRoutes from "../ProtectedRoute/ProtectedRoute";
 
 
 function App() {
@@ -22,12 +23,14 @@ function App() {
     popupType: "success",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const tokenCheck = useCallback(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      auth.authorize(token)
+      auth.authorize()
         .then(res => {
+          setIsLoading(true);
           if (res) {
             setIsLoggedIn(true);
             navigate('/', {replace: true})
@@ -39,12 +42,13 @@ function App() {
         .catch(e => {
           console.log(e)
         })
+        .finally(() => setIsLoading(false))
     }
   }, [navigate])
 
   useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [tokenCheck]);
 
   const onRegister = (name, email, password) => {
     auth.register(name, email, password)
@@ -89,9 +93,11 @@ function App() {
         <Header loggedIn={isLoggedIn}/> : null}
       <Routes>
         <Route path={'/'} element={<Main/>}/>
-        <Route path={'/movies'} element={<Movies/>}/>
-        <Route path={'/saved-movies'} element={<SavedMovies/>}/>
-        <Route path={'/profile'} element={<Profile/>}/>
+        <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
+          <Route path={'/movies'} element={<Movies/>}/>
+          <Route path={'/saved-movies'} element={<SavedMovies/>}/>
+          <Route path={'/profile'} element={<Profile/>}/>
+        </Route>
         <Route path={"/signup"} element={<Register onRegister={onRegister}/>}/>
         <Route path={"/signin"} element={<Login onLogin={onLogin}/>}/>
         <Route path={"*"} element={<PageNotFound/>}/>
