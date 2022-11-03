@@ -9,11 +9,11 @@ import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import * as auth from '../../utils/Auth';
 import React, {useCallback, useEffect, useState} from "react";
 import InfoPopup from "../InfoTooltip/InfoPopup";
 import ProtectedRoutes from "../ProtectedRoute/ProtectedRoute";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
+import {useMainApi} from "../../utils/MainApi";
 
 
 function App() {
@@ -26,12 +26,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const {login, register, authorize, updateUser} = useMainApi();
 
   const tokenCheck = useCallback(() => {
     const token = localStorage.getItem('token');
     if (token) {
       setIsLoading(true);
-      auth.authorize()
+      authorize()
         .then(res => {
           if (res) {
             const {email, name} = res;
@@ -55,7 +56,7 @@ function App() {
   }, [tokenCheck]);
 
   const onRegister = (name, email, password) => {
-    auth.register(name, email, password)
+    register(name, email, password)
       .then(res => {
         if (res) {
           navigate("/signin", {replace: true});
@@ -71,7 +72,7 @@ function App() {
   }
 
   const onLogin = (email, password) => {
-    auth.login(email, password)
+    login(email, password)
       .then(res => {
         if (res) {
           setIsLoggedIn(true);
@@ -84,6 +85,18 @@ function App() {
       .catch(e => {
         console.log(e)
         setInfoPopupOption({popupOpen: true, popupType: "failure"})
+      })
+  }
+
+  const handleUpdateUser = (email, name) => {
+    updateUser(email, name)
+      .then(res => {
+        if (res) {
+          setCurrentUser({email, name})
+        }
+      })
+      .catch(e => {
+        console.log(e)
       })
   }
 
@@ -101,7 +114,7 @@ function App() {
           <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
             <Route path={'/movies'} element={<Movies/>}/>
             <Route path={'/saved-movies'} element={<SavedMovies/>}/>
-            <Route path={'/profile'} element={<Profile/>}/>
+            <Route path={'/profile'} element={<Profile onUpdateUser={handleUpdateUser}/>}/>
           </Route>
           <Route path={"/signup"} element={<Register onRegister={onRegister}/>}/>
           <Route path={"/signin"} element={<Login onLogin={onLogin}/>}/>

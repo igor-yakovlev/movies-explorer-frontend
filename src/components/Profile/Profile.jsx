@@ -2,19 +2,32 @@ import React, {useEffect, useState} from 'react';
 import './Profile.css';
 import FormButton from "../FormButton/FormButton";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
+import ProfileInput from "./ProfileInput/ProfileInput";
+import {useValidation} from "../../utils/useValidation";
 
 const intialValues = {
   name: '',
   email: '',
 }
 
-const Profile = ({}) => {
+const validRegConfig = {
+  name: {
+    required: true,
+    minLength: 2,
+    maxLength: 10,
+  },
+  email: {
+    required: true
+  }
+}
+
+const Profile = ({onUpdateUser}) => {
   const user = React.useContext(CurrentUserContext);
-  const [value, setValue] = useState(intialValues)
+  const [values, setValues] = useState(intialValues)
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    setValue({name: user.name, email: user.email})
+    setValues({name: user.name, email: user.email})
   }, [user])
 
   const handleEditing = () => {
@@ -23,32 +36,32 @@ const Profile = ({}) => {
 
   const handleChange = ({target}) => {
     const {name, value} = target
-    setValue(prevState => ({...prevState, [name]: value}))
+    setValues(prevState => ({...prevState, [name]: value}))
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onUpdateUser(values.email, values.name)
+  }
+
+  const {errors, handleBlur, isValid} = useValidation();
   return (
-    <div className="profile">
+    <form className="profile form" noValidate onSubmit={handleSubmit}>
       <div className="profile__wrapper">
         <h2 className={"profile__title"}>Привет, {user.name}!</h2>
-        <div className="profile__input-container">
-          <label htmlFor="name" className="profile__label">
-            Имя
-          </label>
-          <input type="text" id={'name'} disabled={!isEditing} name={'name'} value={value.name} onChange={handleChange} className="profile__input"/>
-        </div>
+        <ProfileInput label={'Имя'} type={'text'} disabled={!isEditing} name={'name'} value={values.name}
+                      validConfig={validRegConfig.name} isValid={isValid} error={errors.name} onBlur={handleBlur}
+                      onChange={handleChange}/>
         <hr size={'1px'} color={'#E8E8E8'} width={'100%'} className={'profile__line'}/>
-        <div className="profile__input-container">
-          <label htmlFor="email" className="profile__label">
-            E-mail
-          </label>
-          <input type="text" id={'email'} disabled={!isEditing} name={'email'} value={value.email} onChange={handleChange} className="profile__input"/>
-        </div>
+        <ProfileInput label={'Email'} type={'email'} disabled={!isEditing} name={'email'} value={values.email}
+                      validConfig={validRegConfig.email} isValid={isValid} error={errors.email} onBlur={handleBlur}
+                      onChange={handleChange}/>
       </div>
       <div className="profile__button-container">
         {isEditing ?
           <>
             <span className="profile__error"></span>
-            <FormButton>Сохранить</FormButton>
+            <FormButton disabled={!isValid}>Сохранить</FormButton>
           </>
           :
           <>
@@ -57,7 +70,7 @@ const Profile = ({}) => {
           </>
         }
       </div>
-    </div>
+    </form>
   )
 }
 

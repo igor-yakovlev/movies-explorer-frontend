@@ -1,6 +1,8 @@
-import {useState} from "react";
+import React, {useState} from "react";
+import {CurrentUserContext} from "../context/CurrentUserContext";
 
 export function useValidation() {
+  const user = React.useContext(CurrentUserContext);
 
   const [isValid, setIsValid] = useState(false);
   const [errors, setErrors] = useState({});

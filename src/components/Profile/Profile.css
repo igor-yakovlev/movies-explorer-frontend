@@ -35,7 +35,7 @@
 
 .profile__input {
   margin: 0;
-  padding: 0;
+  padding: 0 5px 0 0;
   width: 100%;
   text-align: right;
   border: none;
@@ -46,6 +46,10 @@
 
 .profile__input:disabled {
   background: transparent;
+}
+
+.profile__input-error {
+  color: red;
 }
 
 .profile__line {
