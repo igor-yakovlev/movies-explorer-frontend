@@ -1,5 +1,4 @@
 const BASE_URL = 'https://api.igor.yakovlev.nomoredomains.icu';
-
 const headers = () => ({"Content-type": "application/json",});
 
 

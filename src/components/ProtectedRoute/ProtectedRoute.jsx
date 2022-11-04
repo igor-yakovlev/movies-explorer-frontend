@@ -3,9 +3,9 @@ import {Navigate, Outlet} from "react-router-dom";
 
 
 const ProtectedRoutes = ({loggedIn}) => {
-  console.log(loggedIn)
+  const token = localStorage.getItem('token');
   return (
-    loggedIn ? <Outlet/> : <Navigate to={'/signin'}/>
+    token ? <Outlet/> : <Navigate to={'/signin'}/>
   )
 }
 

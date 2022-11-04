@@ -1,6 +1,9 @@
 .moviesCard {
   background: #FDFDFD;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .moviesCard__head {
@@ -45,11 +48,15 @@
 .moviesCard__body {
   padding: 0;
   margin: 0;
+  flex: 1;
+}
+
+.moviesCard__body-link {
+  width: 100%;
+  height: 100%;
 }
 
 .moviesCard__image {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
+  width: inherit;
+  height: inherit;
 }

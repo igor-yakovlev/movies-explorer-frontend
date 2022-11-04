@@ -14,6 +14,8 @@ import InfoPopup from "../InfoTooltip/InfoPopup";
 import ProtectedRoutes from "../ProtectedRoute/ProtectedRoute";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
 import {useMainApi} from "../../utils/MainApi";
+import {useMoviesData} from "../../utils/MoviesApi";
+import Preloader from "../Preloader/Preloader";
 
 
 function App() {
@@ -26,7 +28,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [movies, setMovies] = useState([]);
   const {login, register, authorize, updateUser} = useMainApi();
+  const {getMovies} = useMoviesData();
 
   const tokenCheck = useCallback(() => {
     const token = localStorage.getItem('token');
@@ -38,7 +42,6 @@ function App() {
             const {email, name} = res;
             setCurrentUser({email, name})
             setIsLoggedIn(true);
-            // navigate('/', {replace: true})
           } else {
             setIsLoggedIn(false);
             localStorage.removeItem('token')
@@ -49,11 +52,23 @@ function App() {
         })
         .finally(() => setIsLoading(false))
     }
-  }, [navigate])
+  }, [navigate]);
+
+
+  const getAllMovies = () => {
+    getMovies()
+      .then(res => {
+        if (res) {
+          setMovies(res);
+          localStorage.setItem('movies', JSON.stringify(res));
+        }
+      })
+  }
 
   useEffect(() => {
     tokenCheck();
-  }, [tokenCheck]);
+    getAllMovies();
+  }, []);
 
   const onRegister = (name, email, password) => {
     register(name, email, password)
@@ -120,7 +135,7 @@ function App() {
           <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
             <Route path={'/movies'} element={<Movies/>}/>
             <Route path={'/saved-movies'} element={<SavedMovies/>}/>
-            <Route path={'/profile'} element={<Profile onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
+            <Route path={'/profile'} element={<Profile isLoading={isLoading} onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
           </Route>
           <Route path={"/signup"} element={<Register onRegister={onRegister}/>}/>
           <Route path={"/signin"} element={<Login onLogin={onLogin}/>}/>

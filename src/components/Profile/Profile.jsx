@@ -4,8 +4,9 @@ import FormButton from "../FormButton/FormButton";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
 import ProfileInput from "./ProfileInput/ProfileInput";
 import {useValidation} from "../../utils/useValidation";
+import Preloader from "../Preloader/Preloader";
 
-const intialValues = {
+const initialValues = {
   name: '',
   email: '',
 }
@@ -21,9 +22,9 @@ const validRegConfig = {
   }
 }
 
-const Profile = ({onUpdateUser, signOut}) => {
+const Profile = ({onUpdateUser, signOut, isLoading}) => {
   const user = React.useContext(CurrentUserContext);
-  const [values, setValues] = useState(intialValues)
+  const [values, setValues] = useState(initialValues)
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -42,9 +43,12 @@ const Profile = ({onUpdateUser, signOut}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateUser(values.email, values.name)
+    setIsEditing(false);
   }
 
   const {errors, handleBlur, isValid} = useValidation();
+
+  if (isLoading) return <Preloader/>
   return (
     <form className="profile form" noValidate onSubmit={handleSubmit}>
       <div className="profile__wrapper">

@@ -5,12 +5,13 @@ import Navigation from "../Navigation/Navigation";
 import {Link} from "react-router-dom";
 
 const Header = ({loggedIn}) => {
+  const token = localStorage.getItem('token');
   return (
     <header className="header">
       <Link to={'/'} className='header__logo'>
         <img src={logo} alt="Logo"/>
       </Link>
-      <Navigation isLoggedIn={loggedIn}/>
+      <Navigation isLoggedIn={Boolean(token)}/>
     </header>
   )
 }

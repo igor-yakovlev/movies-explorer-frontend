@@ -1,14 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './SearchForm.css';
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from '../../images/searchForm/search_icon.svg'
 
-const SearchForm = ({placeholder, type}) => {
+const SearchForm = ({placeholder, type, onSubmit}) => {
+  const [searchString, setSearchString] = useState('');
+
+  const handleChange = ({target}) => {
+    const {value} = target;
+    setSearchString(value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(searchString)
+  }
+
   return (
-    <form className={"searchForm"}>
+    <form className={"searchForm"} onSubmit={handleSubmit}>
       <div className="searchForm__container">
         <img src={search} alt="Search" className="searchForm__icon"/>
-        <input required={true} type={type} placeholder={placeholder} className={'searchForm__input'}/>
+        <input required={true} type={type} placeholder={placeholder} value={searchString} onChange={handleChange} className={'searchForm__input'}/>
         <button className={"searchForm__button"}></button>
       </div>
       <div className="searchForm__vl-container">
