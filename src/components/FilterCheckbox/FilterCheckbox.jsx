@@ -4,7 +4,8 @@ import './FilterCheckbox.css';
 
 const FilterCheckbox = ({id, name, htmlFor, onCheck, isChecked}) => {
 
-  const handleChecked = () => {
+
+  const handleChecked = ({target}) => {
     onCheck(!isChecked);
   }
 

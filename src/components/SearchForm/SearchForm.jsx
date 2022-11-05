@@ -25,7 +25,7 @@ const SearchForm = ({placeholder, type, onSubmit, onCheck, isChecked}) => {
     <form className={"searchForm"} onSubmit={handleSubmit}>
       <div className="searchForm__container">
         <img src={search} alt="Search" className="searchForm__icon"/>
-        <input required={true} type={type} placeholder={placeholder} value={searchString} onChange={handleChange} className={'searchForm__input'}/>
+        <input  type={type} placeholder={placeholder} value={searchString} onChange={handleChange} className={'searchForm__input'}/>
         <button className={"searchForm__button"}></button>
       </div>
       <div className="searchForm__vl-container">

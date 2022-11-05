@@ -2,85 +2,105 @@ import React, {useEffect, useState} from 'react';
 import './Movies.css';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesButton from "../MoviesButton/MoviesButton";
 import Preloader from "../Preloader/Preloader";
 import {usePagination} from "../../utils/usePagination";
 
 
+const errorConfig = {
+  errorName: 'Введите название фильма для поиска',
+  errorRequest: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного, перезагрузите страницу и попробуйте ещё раз',
+  errorNotFound: 'Ничего не найдено',
+}
+
+
 const Movies = ({}) => {
   const [searchMovies, setSearchMovies] = useState([]);
-  const [searchError, setSearchError] = useState('Введите название фильма для поиска');
+  const [searchError, setSearchError] = useState(errorConfig.errorName);
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const searchMovies = JSON.parse(localStorage.getItem('searchMovies'));
-    const searchFormCheck = localStorage.getItem('searchMoviesCheck');
-    if (searchMovies) {
+    const searchMoviesCheck = JSON.parse(localStorage.getItem('searchMoviesCheck'));
+
+    if (searchMovies.length !== 0) {
       setSearchError('')
       setSearchMovies(searchMovies)
     }
 
-
-    if (searchFormCheck === 'true') {
-      setIsChecked(true);
-      handleCheckDuration(true)
+    if (searchMoviesCheck) {
+      const shortFilms = searchMovies.filter(movie => movie.duration <= 40);
+      setSearchMovies(shortFilms);
+      setIsChecked(searchMoviesCheck)
     }
   }, [])
 
 
-  const handleSearchMovies = (searchString) => {
+  async function handleSearchMovies(searchString) {
     setIsLoading(true);
-    const movies = JSON.parse(localStorage.getItem('movies'));
     try {
-      const searchMovies = movies.filter(movie => movie.nameRU.toLowerCase().includes(searchString.toLowerCase()));
-      setSearchMovies(searchMovies)
-      if (searchMovies.length !== 0) {
-        setSearchError('')
-        localStorage.setItem('searchMovies', JSON.stringify(searchMovies))
+      if (searchString) {
+        const movies = JSON.parse(localStorage.getItem('movies'));
+        const searchMovies = movies.filter(movie => movie.nameRU.toLowerCase().includes(searchString.toLowerCase()));
+        if (!searchMovies.length) {
+          setSearchError(errorConfig.errorNotFound)
+        } else {
+          setSearchError('')
+          localStorage.setItem('searchMovies', JSON.stringify(searchMovies))
+          localStorage.setItem('moviesSearchString', searchString);
+        }
+        setSearchMovies(searchMovies)
+      } else {
+        localStorage.setItem('searchMovies', JSON.stringify([]))
         localStorage.setItem('moviesSearchString', searchString);
+        setSearchMovies([]);
+        setSearchError(errorConfig.errorName)
       }
     } catch (e) {
-      setSearchError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного, перезагрузите страницу и попробуйте ещё раз')
+      setSearchError(errorConfig.errorRequest)
     } finally {
       setIsLoading(false)
     }
-
   }
 
-  const handleCheckDuration = (isChecked) => {
+  const getFilteredMovies = (isChecked) => {
     setIsChecked(isChecked)
     if (isChecked) {
       if (searchMovies.length) {
         const shortFilms = searchMovies.filter(movie => movie.duration <= 40);
         setSearchMovies(shortFilms);
-        if (!shortFilms.length) setSearchError('Короткометражек по данному запросу не найдено')
+        if (!shortFilms.length) setSearchError(errorConfig.errorNotFound)
       }
     } else {
-      setSearchMovies(JSON.parse(localStorage.getItem('searchMovies')));
+      const searchMovies = JSON.parse(localStorage.getItem('searchMovies'));
+      setSearchMovies(searchMovies);
       setSearchError('')
     }
     localStorage.setItem('searchMoviesCheck', isChecked);
   }
 
-  const {handleSetPage, selectedMovies, hasNewPage} = usePagination(searchMovies, 2);
+  const {handleSetPage, selectedMovies, hasNewPage} = usePagination(searchMovies, 3);
 
   return (
     <section className='movies'>
-      <SearchForm placeholder={'Фильмы'} onSubmit={handleSearchMovies} onCheck={handleCheckDuration}
+      <SearchForm placeholder={'Фильмы'} onSubmit={handleSearchMovies} onCheck={getFilteredMovies}
                   isChecked={isChecked}/>
       <hr color={'#E8E8E8'} size={'1px'} width={'100%'} className={'movies__line'}/>
-      <section className="movies__error-block">
-        <h1>{searchError}</h1>
-      </section>
-      {isLoading ? <Preloader/> :
-        <>
-          <MoviesCardList renderMoviesArr={selectedMovies}/>
-          <div className="movies__wrapper">
-            {hasNewPage && <MoviesButton type={"button"} onClick={handleSetPage}>Ещё</MoviesButton>}
-          </div>
-        </>
+      {searchError
+        ?
+        <section className="movies__error-block">
+          <p className={'movies__error-text'}>{searchError}</p>
+        </section>
+        : (
+          isLoading ? <Preloader/> :
+            <>
+              <MoviesCardList renderMoviesArr={selectedMovies}/>
+              <div className="movies__wrapper">
+                {hasNewPage && <MoviesButton type={"button"} onClick={handleSetPage}>Ещё</MoviesButton>}
+              </div>
+            </>
+        )
       }
     </section>
   )
