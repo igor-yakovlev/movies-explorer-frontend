@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SearchForm.css';
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from '../../images/searchForm/search_icon.svg'
 
-const SearchForm = ({placeholder, type, onSubmit}) => {
+const SearchForm = ({placeholder, type, onSubmit, onCheck, isChecked}) => {
   const [searchString, setSearchString] = useState('');
+
+  useEffect(() => {
+    const localSearchString = localStorage.getItem('moviesSearchString')
+    setSearchString(localSearchString)
+  }, [])
 
   const handleChange = ({target}) => {
     const {value} = target;
@@ -27,7 +32,7 @@ const SearchForm = ({placeholder, type, onSubmit}) => {
         <div className="searchForm__vl"></div>
       </div>
       <div className={"searchForm__wrapper"}>
-        <FilterCheckbox/>
+        <FilterCheckbox onCheck={onCheck} isChecked={isChecked}/>
         <span className={"searchForm__text"}>Короткометражки</span>
       </div>
     </form>

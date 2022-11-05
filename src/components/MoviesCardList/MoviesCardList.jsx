@@ -1,12 +1,15 @@
 import React from 'react';
 import './MoviesCardList.css';
 import Preloader from "../Preloader/Preloader";
+import MoviesCard from "../MoviesCard/MoviesCard";
 
 
-const MoviesCardList = ({children}) => {
+const MoviesCardList = ({ renderMoviesArr }) => {
     return (
         <ul className="moviesCardList">
-          {children}
+          {renderMoviesArr.map(movie => {
+            return <MoviesCard key={movie.id} data={movie}/>
+          })}
         </ul>
     )
 }

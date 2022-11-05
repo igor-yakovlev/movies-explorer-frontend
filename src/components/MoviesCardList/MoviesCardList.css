@@ -1,7 +1,5 @@
 .moviesCardList {
   margin-top: 69px;
-  padding-top: 80px;
-  border-top: 1px solid #E8E8E8;
   list-style-type: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, 364px);

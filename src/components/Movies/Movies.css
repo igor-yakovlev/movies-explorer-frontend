@@ -11,6 +11,14 @@
   justify-content: center;
 }
 
+.movies__line {
+  margin-top: 80px;
+}
+
+.movies__error-block {
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .movies {
     margin: 0 30px;

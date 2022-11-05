@@ -2,16 +2,15 @@ import React, {useState} from 'react';
 import './FilterCheckbox.css';
 
 
-const FilterCheckbox = ({id, name, htmlFor}) => {
-  const [checked, setChecked] = useState(false);
+const FilterCheckbox = ({id, name, htmlFor, onCheck, isChecked}) => {
 
   const handleChecked = () => {
-    setChecked(!checked)
+    onCheck(!isChecked);
   }
 
   return (
     <div className="filterSwitch">
-      <input type="checkbox" checked={checked} onChange={handleChecked} className="filterSwitch__checkbox" name={name}
+      <input type="checkbox" checked={isChecked} onChange={handleChecked} className="filterSwitch__checkbox" name={name}
              id={id}/>
       <label className="filterSwitch__label" htmlFor={htmlFor}>
         <span className="filterSwitch__inner"/>
