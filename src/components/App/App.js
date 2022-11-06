@@ -29,7 +29,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
 
-  const {login, register, authorize, updateUser, addMovie, getSavedMovies} = useMainApi();
+  const {login, register, authorize, updateUser, addMovie, getSavedMovies, deleteSavedMovies} = useMainApi();
   const {getMovies} = useMoviesData();
 
   const getAllMovies = () => {
@@ -130,10 +130,28 @@ function App() {
   }
 
   const handleToggleMovies = (movie) => {
-    addMovie(movie)
-      .then(res => {
-        setSavedMovies(prevState => ([...prevState, res]))
-      })
+    const isSaved = savedMovies.some(film => film.movieId === movie.movieId || film.movieId === movie.id);
+    if (isSaved) {
+      const deleteMovieId = !movie._id ? savedMovies.find(film => film.movieId === movie.id)['_id'] : movie._id;
+      deleteSavedMovies(deleteMovieId)
+        .then(res => {
+          if (res) {
+            setSavedMovies(savedMovies.filter(film => film.movieId !== res.movieId));
+          }
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    } else {
+      addMovie(movie)
+        .then(res => {
+          setSavedMovies(prevState => [...prevState, res])
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
+
   }
 
   const closePopup = () => {

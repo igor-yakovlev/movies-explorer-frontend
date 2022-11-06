@@ -5,7 +5,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 
 
-export const errorConfig = {
+const errorConfig = {
   errorName: 'Введите название фильма для поиска',
   errorRequest: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного, перезагрузите страницу и попробуйте ещё раз',
   errorNotFound: 'Ничего не найдено',
@@ -40,7 +40,7 @@ const Movies = ({savedMovies, getMovies, handleToggleMovies}) => {
     }
 
     if (localSearchMoviesCheck) {
-      const shortFilms = searchMovies.filter(movie => movie.duration <= 40);
+      const shortFilms = localSearchMovies.filter(movie => movie.duration <= 40);
       setSearchMovies(shortFilms);
       setIsChecked(localSearchMoviesCheck)
     }
