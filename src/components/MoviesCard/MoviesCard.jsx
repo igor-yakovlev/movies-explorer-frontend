@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './MoviesCard.css';
 import buttonIcon from '../../images/moviesCard/moviesCard__button.svg';
 import buttonIconActive from '../../images/moviesCard/moviesCard__button_active.svg';
@@ -16,10 +16,17 @@ const getImage = (url) => {
   return ` https://api.nomoreparties.co/${url}`
 }
 
-const MoviesCard = ({data, handleToggleMovies}) => {
+const MoviesCard = ({savedMovies = [], data, handleToggleMovies}) => {
   const {pathname} = useLocation();
   const {nameRU, duration, image, trailerLink} = data;
   const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    if (pathname === '/movies') {
+      const isSaved = savedMovies.some(movie => movie.movieId === data.id);
+      setActive(isSaved)
+    }
+  }, [savedMovies])
 
   const handleClick = () => {
     setActive(!active)

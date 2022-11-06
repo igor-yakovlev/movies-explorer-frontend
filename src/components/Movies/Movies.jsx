@@ -12,7 +12,7 @@ export const errorConfig = {
 }
 
 
-const Movies = ({getMovies, handleToggleMovies}) => {
+const Movies = ({savedMovies, getMovies, handleToggleMovies}) => {
   const [searchMovies, setSearchMovies] = useState([]);
   const [searchError, setSearchError] = useState(errorConfig.errorName);
   const [initialSearchString, setInitialSearchString] = useState('');
@@ -105,7 +105,7 @@ const Movies = ({getMovies, handleToggleMovies}) => {
         </section>
         : (
           isLoading ? <Preloader/> :
-            <MoviesCardList renderMoviesArr={searchMovies} handleToggleMovies={handleToggleMovies}/>
+            <MoviesCardList savedMovies={savedMovies} renderMoviesArr={searchMovies} handleToggleMovies={handleToggleMovies}/>
         )
       }
     </section>

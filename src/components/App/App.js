@@ -159,7 +159,7 @@ function App() {
           <Route path={'/'} element={<Main/>}/>
           <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
             <Route path={'/movies'}
-                   element={<Movies getMovies={getAllMovies} handleToggleMovies={handleToggleMovies}/>}/>
+                   element={<Movies savedMovies={savedMovies} getMovies={getAllMovies} handleToggleMovies={handleToggleMovies}/>}/>
             <Route path={'/saved-movies'} element={<SavedMovies isLoading={isLoading} savedMovies={savedMovies} handleToggleMovies={handleToggleMovies}/>}/>
             <Route path={'/profile'}
                    element={<Profile isLoading={isLoading} onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
