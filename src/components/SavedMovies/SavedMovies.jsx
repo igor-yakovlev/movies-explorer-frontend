@@ -11,7 +11,6 @@ const errorConfig = {
 }
 
 
-
 const SavedMovies = ({savedMovies, isLoading, handleToggleMovies}) => {
   const [searchError, setSearchError] = useState(errorConfig.errorNull);
   const [initialSearchString, setInitialSearchString] = useState('');
@@ -19,7 +18,7 @@ const SavedMovies = ({savedMovies, isLoading, handleToggleMovies}) => {
   const [foundSavedMovies, setFoundSavedMovies] = useState([]);
 
   useEffect(() => {
-    if (savedMovies.length !== 0)  {
+    if (savedMovies.length !== 0) {
       setFoundSavedMovies(savedMovies)
       setSearchError('')
     }
@@ -63,18 +62,18 @@ const SavedMovies = ({savedMovies, isLoading, handleToggleMovies}) => {
 
   return (
     <section className={'savedMovies'}>
-      <SearchForm initialSearchValue={initialSearchString} onSubmit={handleSearchMovies} isChecked={isChecked} onCheck={getFilteredMovies}/>
+      <SearchForm initialSearchValue={initialSearchString} onSubmit={handleSearchMovies} isChecked={isChecked}
+                  onCheck={getFilteredMovies}/>
       <hr color={'#E8E8E8'} size={'1px'} width={'100%'} className={'movies__line'}/>
-      {searchError
-        ?
-        <section className="movies__error-block">
-          <p className={'movies__error-text'}>{searchError}</p>
-        </section>
-        : (
-          isLoading ? <Preloader/> :
-            <MoviesCardList renderMoviesArr={foundSavedMovies} handleToggleMovies={handleToggleMovies}/>
-        )
+      {isLoading ? <Preloader/> :
+        savedMovies.length === 0 ?
+          <section className="movies__error-block">
+            <p className={'movies__error-text'}>{searchError}</p>
+          </section>
+          :
+        <MoviesCardList renderMoviesArr={foundSavedMovies} handleToggleMovies={handleToggleMovies}/>
       }
+
     </section>
   )
 }

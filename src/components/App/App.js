@@ -10,7 +10,7 @@ import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import React, {useCallback, useEffect, useState} from "react";
-import InfoPopup from "../InfoTooltip/InfoPopup";
+import InfoPopup from "../InfoPopup/InfoPopup";
 import ProtectedRoutes from "../ProtectedRoute/ProtectedRoute";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
 import {useMainApi} from "../../utils/MainApi";
@@ -48,7 +48,7 @@ function App() {
     getSavedMovies()
       .then(res => {
         if (res) {
-          setSavedMovies(res)
+          setSavedMovies(res);
         }
       })
       .catch(e => {

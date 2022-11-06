@@ -47,7 +47,7 @@ const Movies = ({savedMovies, getMovies, handleToggleMovies}) => {
   }, [])
 
 
-  const  handleSearchMovies = (searchString) => {
+  const handleSearchMovies = (searchString) => {
     setIsLoading(true);
     try {
       if (searchString) {
@@ -98,15 +98,14 @@ const Movies = ({savedMovies, getMovies, handleToggleMovies}) => {
       <SearchForm initialSearchValue={initialSearchString} onSubmit={handleSearchMovies} onCheck={getFilteredMovies}
                   isChecked={isChecked}/>
       <hr color={'#E8E8E8'} size={'1px'} width={'100%'} className={'movies__line'}/>
-      {searchError
-        ?
-        <section className="movies__error-block">
-          <p className={'movies__error-text'}>{searchError}</p>
-        </section>
-        : (
-          isLoading ? <Preloader/> :
-            <MoviesCardList savedMovies={savedMovies} renderMoviesArr={searchMovies} handleToggleMovies={handleToggleMovies}/>
-        )
+      {isLoading ? <Preloader/> :
+        searchMovies.length === 0 ?
+          <section className="movies__error-block">
+            <p className={'movies__error-text'}>{searchError}</p>
+          </section>
+          :
+          <MoviesCardList savedMovies={savedMovies} renderMoviesArr={searchMovies}
+                          handleToggleMovies={handleToggleMovies}/>
       }
     </section>
   )
