@@ -30,19 +30,17 @@ const Movies = ({getMovies}) => {
       getMovies()
     }
 
-    if (!initialSearchString) {
+    if (localSearchString) {
       setInitialSearchString(localSearchString);
     }
 
-    if (searchMovies.length === 0) {
+    if (localSearchMovies) {
       setSearchError('')
       setSearchMovies(localSearchMovies)
     }
 
     if (localSearchMoviesCheck) {
-      console.log(searchMovies)
       const shortFilms = searchMovies.filter(movie => movie.duration <= 40);
-      console.log(shortFilms)
       setSearchMovies(shortFilms);
       setIsChecked(localSearchMoviesCheck)
     }
@@ -86,8 +84,10 @@ const Movies = ({getMovies}) => {
       }
     } else {
       const searchMovies = JSON.parse(localStorage.getItem('searchMovies'));
-      setSearchMovies(searchMovies);
-      setSearchError('')
+      if (searchMovies) {
+        setSearchMovies(searchMovies);
+        setSearchError('')
+      }
     }
     localStorage.setItem('searchMoviesCheck', isChecked);
   }
