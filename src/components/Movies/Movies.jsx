@@ -80,7 +80,6 @@ const Movies = ({}) => {
     localStorage.setItem('searchMoviesCheck', isChecked);
   }
 
-  const {handleSetPage, selectedMovies, hasNewPage} = usePagination(searchMovies, 3);
 
   return (
     <section className='movies'>
@@ -94,12 +93,7 @@ const Movies = ({}) => {
         </section>
         : (
           isLoading ? <Preloader/> :
-            <>
-              <MoviesCardList renderMoviesArr={selectedMovies}/>
-              <div className="movies__wrapper">
-                {hasNewPage && <MoviesButton type={"button"} onClick={handleSetPage}>Ещё</MoviesButton>}
-              </div>
-            </>
+            <MoviesCardList renderMoviesArr={searchMovies}/>
         )
       }
     </section>

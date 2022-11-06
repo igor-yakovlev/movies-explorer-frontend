@@ -2,7 +2,7 @@ const BASE_URL = 'https://api.igor.yakovlev.nomoredomains.icu';
 const headers = () => ({"Content-type": "application/json",});
 
 
-export function useMainApi () {
+export function useMainApi() {
   return {
     register: (name, email, password) => {
       return fetch(`${BASE_URL}/signup`, {
@@ -52,7 +52,7 @@ export function useMainApi () {
       })
         .then(response => {
           try {
-            if(response.status === 200) {
+            if (response.status === 200) {
               return response.json();
             }
           } catch (e) {
@@ -75,7 +75,82 @@ export function useMainApi () {
       })
         .then(response => {
           try {
-            if(response.ok) {
+            if (response.ok) {
+              return response.json()
+            }
+          } catch (e) {
+            return e
+          }
+        })
+        .then(data => data)
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    addMovie: (movie) => {
+      return fetch(`${BASE_URL}/movies`, {
+        method: 'POST',
+        headers: headers(),
+        credentials: 'include',
+        body: JSON.stringify({
+          country: movie.country,
+          director: movie.director,
+          duration: movie.duration,
+          year: movie.year,
+          description: movie.description,
+          image: `https://api.nomoreparties.co${movie.image.url}`,
+          trailerLink: movie.trailerLink,
+          thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
+          nameRU: movie.nameRU,
+          nameEN: movie.nameEN,
+          movieId: movie.id
+        })
+      })
+        .then(response => {
+          try {
+            if (response.ok) {
+              return response.json()
+            }
+          } catch (e) {
+            return e
+          }
+        })
+        .then(data => data)
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    getSavedMovies : () => {
+      return fetch(`${BASE_URL}/movies`, {
+        method: 'GET',
+        headers: headers(),
+        credentials: 'include'
+      })
+        .then(response => {
+          try {
+            if (response.status === 200) {
+              return response.json();
+            }
+          } catch (e) {
+            return e;
+          }
+        })
+        .then(data => {
+          return data
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    deleteSavedMovies : (id) => {
+      return fetch(`${BASE_URL}/movies/${id}`, {
+        method: 'DELETE',
+        headers: headers(),
+        credentials: 'include'
+      })
+        .then(response => {
+          try {
+            if (response.ok) {
               return response.json()
             }
           } catch (e) {
