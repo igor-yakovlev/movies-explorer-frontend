@@ -3,7 +3,7 @@ import './SearchForm.css';
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from '../../images/searchForm/search_icon.svg'
 
-const SearchForm = ({ initialSearchValue, onSubmit, onCheck, isChecked}) => {
+const SearchForm = ({ initialSearchValue = '', onSubmit, onCheck, isChecked}) => {
   const [searchString, setSearchString] = useState('');
 
   useEffect(() => {

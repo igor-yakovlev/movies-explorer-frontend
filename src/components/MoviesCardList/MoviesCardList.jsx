@@ -9,7 +9,6 @@ import {useLocation} from "react-router-dom";
 const MoviesCardList = ({ savedMovies = [], renderMoviesArr, handleToggleMovies}) => {
   const {handleSetPage, selectedMovies, hasNewPage} = usePagination(renderMoviesArr, 3);
   const {pathname} = useLocation();
-
   return (
     <>
       <ul className="moviesCardList">
