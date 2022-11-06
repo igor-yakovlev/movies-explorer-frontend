@@ -6,7 +6,7 @@ export function usePagination(array) {
   const [totalPages, setTotalPages] = useState(0);
   const [hasNewPage, setHasNewPage] = useState(true);
   useEffect(() => {
-    let total = Math.floor(array.length / USER_PER_PAGE + 1)
+    let total = Math.ceil(array.length / USER_PER_PAGE)
     setTotalPages(total);
     if (page === total || total <= 0) {
       setHasNewPage(false)

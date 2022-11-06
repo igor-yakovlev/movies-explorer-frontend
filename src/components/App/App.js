@@ -29,7 +29,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
 
-  const {login, register, authorize, updateUser} = useMainApi();
+  const {login, register, authorize, updateUser, addMovie, getSavedMovies} = useMainApi();
   const {getMovies} = useMoviesData();
 
   const getAllMovies = () => {
@@ -39,6 +39,22 @@ function App() {
           localStorage.setItem('movies', JSON.stringify(res));
         }
       })
+      .catch(e => {
+        console.log(e)
+      })
+  }
+  const getSaveMovies = () => {
+    setIsLoading(true)
+    getSavedMovies()
+      .then(res => {
+        if (res) {
+          setSavedMovies(res)
+        }
+      })
+      .catch(e => {
+        console.log(e)
+      })
+      .finally( () => setIsLoading(false))
   }
 
   const tokenCheck = useCallback(() => {
@@ -65,6 +81,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
+    getSaveMovies();
   }, []);
 
   const onRegister = (name, email, password) => {
@@ -112,8 +129,11 @@ function App() {
       })
   }
 
-  const handleToggleMovies = () => {
-
+  const handleToggleMovies = (movie) => {
+    addMovie(movie)
+      .then(res => {
+        setSavedMovies(prevState => ([...prevState, res]))
+      })
   }
 
   const closePopup = () => {
@@ -138,8 +158,9 @@ function App() {
         <Routes>
           <Route path={'/'} element={<Main/>}/>
           <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
-            <Route path={'/movies'} element={<Movies getMovies={getAllMovies}/>}/>
-            <Route path={'/saved-movies'} element={<SavedMovies savedMovies={savedMovies}/>}/>
+            <Route path={'/movies'}
+                   element={<Movies getMovies={getAllMovies} handleToggleMovies={handleToggleMovies}/>}/>
+            <Route path={'/saved-movies'} element={<SavedMovies isLoading={isLoading} savedMovies={savedMovies} handleToggleMovies={handleToggleMovies}/>}/>
             <Route path={'/profile'}
                    element={<Profile isLoading={isLoading} onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
           </Route>
