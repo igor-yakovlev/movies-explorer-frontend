@@ -81,8 +81,10 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-    getSaveMovies();
-  }, []);
+    if (pathname === '/movies' || pathname === '/saved-movies') {
+      getSaveMovies();
+    }
+  }, [pathname]);
 
   const onRegister = (name, email, password) => {
     register(name, email, password)

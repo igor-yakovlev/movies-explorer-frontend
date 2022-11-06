@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 
-export function useValidation() {
+export function useValidation(initialValues) {
   const [isValid, setIsValid] = useState(false);
   const [errors, setErrors] = useState({});
-  const handleBlur = ({target}) => {
-    const {validationMessage, name} = target;
+  const [values, setValues] = useState(initialValues);
+  const handleChange = ({target}) => {
+    const {validationMessage, name, value} = target;
+    setValues(prevState => ({...prevState, [name]: value}))
     if (validationMessage) {
       setErrors(prevState => ({...prevState, [name]: validationMessage}));
       setIsValid(false)
@@ -14,5 +16,5 @@ export function useValidation() {
     if (target.closest('.form').checkValidity()) setIsValid(true);
   }
 
-  return {isValid, errors, handleBlur}
+  return {values, isValid, errors, handleChange}
 }

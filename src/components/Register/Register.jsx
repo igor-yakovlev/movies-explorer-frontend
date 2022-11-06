@@ -17,6 +17,7 @@ const validRegConfig = {
     required: true,
     minLength: 2,
     maxLength: 10,
+    pattern: '[a-zA-Zа-яёА-ЯЁ -]{2,40}',
   },
   email: {
     required: true
@@ -28,20 +29,12 @@ const validRegConfig = {
 }
 
 const Register = ({onRegister}) => {
-  const [values, setValues] = useState(initialValues);
-
-  const handleChange = ({target}) => {
-    const {name, value} = target;
-    setValues(prevState => ({...prevState, [name]: value}))
-  }
-
+  const {values, errors, handleChange, isValid} = useValidation(initialValues);
   const handleSubmit = (e) => {
     e.preventDefault();
     const {name, email, password} = values;
     onRegister(name, email ,password);
   }
-
-  const {errors, handleBlur, isValid} = useValidation();
 
   return (
     <div className='register'>
@@ -49,9 +42,9 @@ const Register = ({onRegister}) => {
         <img src={logo} alt="Logo" className='register__logo'/>
         <h2 className="register__title">Добро пожаловать!</h2>
         <form onSubmit={handleSubmit} action="#" className="register__form form" noValidate>
-          <FormInput type={'text'} label={'Имя'} value={values.name} validConfig={validRegConfig.name} isValid={isValid} error={errors.name} onBlur={handleBlur} onChange={handleChange} name={'name'}/>
-          <FormInput type={'email'} label={'E-mail'} value={values.email} validConfig={validRegConfig.email} isValid={isValid} error={errors.email} onBlur={handleBlur} onChange={handleChange} name={'email'}/>
-          <FormInput type={'password'} label={'Пароль'} value={values.password} validConfig={validRegConfig.password} isValid={isValid} error={errors.password} onBlur={handleBlur} onChange={handleChange} name={'password'}/>
+          <FormInput type={'text'} label={'Имя'} value={values.name} validConfig={validRegConfig.name} isValid={isValid} error={errors.name}  onChange={handleChange} name={'name'}/>
+          <FormInput type={'email'} label={'E-mail'} value={values.email} validConfig={validRegConfig.email} isValid={isValid} error={errors.email}  onChange={handleChange} name={'email'}/>
+          <FormInput type={'password'} label={'Пароль'} value={values.password} validConfig={validRegConfig.password} isValid={isValid} error={errors.password}  onChange={handleChange} name={'password'}/>
           <div className="register__form-wrapper">
             <FormButton disabled={!isValid}>Зарегистрироваться</FormButton>
           </div>

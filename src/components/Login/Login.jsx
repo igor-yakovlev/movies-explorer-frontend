@@ -11,27 +11,22 @@ const initialValues = {
   password: '',
 }
 
-const Login = ({onLogin}) => {
-  const [values, setValues] = useState(initialValues);
-
-  const handleChange = ({target}) => {
-    const {name, value} = target;
-    setValues(prevState => ({...prevState, [name]: value}))
+const validLoginConfig = {
+  email: {
+    required: true
+  },
+  password: {
+    required: true,
+    minLength: 3
   }
+}
+
+
+const Login = ({onLogin}) => {
+  const {values, errors, handleChange, isValid} = useValidation(initialValues);
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(values.email, values.password);
-  }
-
-  const {errors, handleBlur, isValid} = useValidation();
-  const validLoginConfig = {
-    email: {
-      required: true
-    },
-    password: {
-      required: true,
-      minLength: 3
-    }
   }
 
   return (
@@ -40,8 +35,10 @@ const Login = ({onLogin}) => {
         <img src={logo} alt="Logo" className='login__logo'/>
         <h2 className="login__title">Рады видеть!</h2>
         <form onSubmit={handleSubmit} className="login__form form" noValidate>
-          <FormInput type={'email'} label={'E-mail'} value={values.email} validConfig={validLoginConfig.email} isValid={isValid} error={errors.email} onBlur={handleBlur} onChange={handleChange} name={'email'}/>
-          <FormInput type={'password'} label={'Пароль'} value={values.password} validConfig={validLoginConfig.password} isValid={isValid} error={errors.password} onBlur={handleBlur} onChange={handleChange} name={'password'}/>
+          <FormInput type={'email'} label={'E-mail'} value={values.email} validConfig={validLoginConfig.email}
+                     isValid={isValid} error={errors.email} onChange={handleChange} name={'email'}/>
+          <FormInput type={'password'} label={'Пароль'} value={values.password} validConfig={validLoginConfig.password}
+                     isValid={isValid} error={errors.password} onChange={handleChange} name={'password'}/>
           <div className="login__form-wrapper">
             <FormButton disabled={!isValid}>Войти</FormButton>
           </div>
