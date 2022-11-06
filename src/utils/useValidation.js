@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {CurrentUserContext} from "../context/CurrentUserContext";
 
 export function useValidation() {
   const [isValid, setIsValid] = useState(false);

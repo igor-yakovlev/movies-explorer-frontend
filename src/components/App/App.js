@@ -15,7 +15,6 @@ import ProtectedRoutes from "../ProtectedRoute/ProtectedRoute";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
 import {useMainApi} from "../../utils/MainApi";
 import {useMoviesData} from "../../utils/MoviesApi";
-import Preloader from "../Preloader/Preloader";
 
 
 function App() {
@@ -29,6 +28,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+
   const {login, register, authorize, updateUser} = useMainApi();
   const {getMovies} = useMoviesData();
 
@@ -115,6 +116,10 @@ function App() {
       })
   }
 
+  const handleToggleMovies = () => {
+
+  }
+
   const closePopup = () => {
     setInfoPopupOption((state) => ({...state, popupOpen: false}));
   };
@@ -134,8 +139,9 @@ function App() {
           <Route path={'/'} element={<Main/>}/>
           <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
             <Route path={'/movies'} element={<Movies/>}/>
-            <Route path={'/saved-movies'} element={<SavedMovies/>}/>
-            <Route path={'/profile'} element={<Profile isLoading={isLoading} onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
+            <Route path={'/saved-movies'} element={<SavedMovies savedMovies={savedMovies}/>}/>
+            <Route path={'/profile'}
+                   element={<Profile isLoading={isLoading} onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
           </Route>
           <Route path={"/signup"} element={<Register onRegister={onRegister}/>}/>
           <Route path={"/signin"} element={<Login onLogin={onLogin}/>}/>

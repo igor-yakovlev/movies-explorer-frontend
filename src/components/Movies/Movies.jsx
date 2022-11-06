@@ -2,12 +2,10 @@ import React, {useEffect, useState} from 'react';
 import './Movies.css';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesButton from "../MoviesButton/MoviesButton";
 import Preloader from "../Preloader/Preloader";
-import {usePagination} from "../../utils/usePagination";
 
 
-const errorConfig = {
+export const errorConfig = {
   errorName: 'Введите название фильма для поиска',
   errorRequest: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного, перезагрузите страницу и попробуйте ещё раз',
   errorNotFound: 'Ничего не найдено',
@@ -17,12 +15,18 @@ const errorConfig = {
 const Movies = ({}) => {
   const [searchMovies, setSearchMovies] = useState([]);
   const [searchError, setSearchError] = useState(errorConfig.errorName);
+  const [initialSearchString, setInitialSearchString] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const searchMovies = JSON.parse(localStorage.getItem('searchMovies'));
     const searchMoviesCheck = JSON.parse(localStorage.getItem('searchMoviesCheck'));
+    const localSearchString = localStorage.getItem('moviesSearchString')
+
+    if (!initialSearchString) {
+      setInitialSearchString(localSearchString);
+    }
 
     if (searchMovies.length !== 0) {
       setSearchError('')
@@ -37,7 +41,7 @@ const Movies = ({}) => {
   }, [])
 
 
-  async function handleSearchMovies(searchString) {
+  const  handleSearchMovies = (searchString) => {
     setIsLoading(true);
     try {
       if (searchString) {
@@ -83,7 +87,7 @@ const Movies = ({}) => {
 
   return (
     <section className='movies'>
-      <SearchForm placeholder={'Фильмы'} onSubmit={handleSearchMovies} onCheck={getFilteredMovies}
+      <SearchForm initialSearchValue={initialSearchString} onSubmit={handleSearchMovies} onCheck={getFilteredMovies}
                   isChecked={isChecked}/>
       <hr color={'#E8E8E8'} size={'1px'} width={'100%'} className={'movies__line'}/>
       {searchError

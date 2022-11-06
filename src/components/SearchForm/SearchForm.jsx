@@ -3,13 +3,12 @@ import './SearchForm.css';
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import search from '../../images/searchForm/search_icon.svg'
 
-const SearchForm = ({placeholder, type, onSubmit, onCheck, isChecked}) => {
+const SearchForm = ({ initialSearchValue, onSubmit, onCheck, isChecked}) => {
   const [searchString, setSearchString] = useState('');
 
   useEffect(() => {
-    const localSearchString = localStorage.getItem('moviesSearchString')
-    setSearchString(localSearchString)
-  }, [])
+    setSearchString(initialSearchValue)
+  }, [initialSearchValue])
 
   const handleChange = ({target}) => {
     const {value} = target;
@@ -25,7 +24,7 @@ const SearchForm = ({placeholder, type, onSubmit, onCheck, isChecked}) => {
     <form className={"searchForm"} onSubmit={handleSubmit}>
       <div className="searchForm__container">
         <img src={search} alt="Search" className="searchForm__icon"/>
-        <input  type={type} placeholder={placeholder} value={searchString} onChange={handleChange} className={'searchForm__input'}/>
+        <input  type={'text'} placeholder={'Фильмы'} value={searchString} onChange={handleChange} className={'searchForm__input'}/>
         <button className={"searchForm__button"}></button>
       </div>
       <div className="searchForm__vl-container">
