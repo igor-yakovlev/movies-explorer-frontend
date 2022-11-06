@@ -12,7 +12,7 @@ export const errorConfig = {
 }
 
 
-const Movies = ({}) => {
+const Movies = ({getMovies}) => {
   const [searchMovies, setSearchMovies] = useState([]);
   const [searchError, setSearchError] = useState(errorConfig.errorName);
   const [initialSearchString, setInitialSearchString] = useState('');
@@ -20,23 +20,31 @@ const Movies = ({}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const searchMovies = JSON.parse(localStorage.getItem('searchMovies'));
-    const searchMoviesCheck = JSON.parse(localStorage.getItem('searchMoviesCheck'));
+    const localMovies = JSON.parse(localStorage.getItem('movies'));
+    const localSearchMovies = JSON.parse(localStorage.getItem('searchMovies'));
+    const localSearchMoviesCheck = JSON.parse(localStorage.getItem('searchMoviesCheck'));
     const localSearchString = localStorage.getItem('moviesSearchString')
+
+
+    if (!localMovies) {
+      getMovies()
+    }
 
     if (!initialSearchString) {
       setInitialSearchString(localSearchString);
     }
 
-    if (searchMovies.length !== 0) {
+    if (searchMovies.length === 0) {
       setSearchError('')
-      setSearchMovies(searchMovies)
+      setSearchMovies(localSearchMovies)
     }
 
-    if (searchMoviesCheck) {
+    if (localSearchMoviesCheck) {
+      console.log(searchMovies)
       const shortFilms = searchMovies.filter(movie => movie.duration <= 40);
+      console.log(shortFilms)
       setSearchMovies(shortFilms);
-      setIsChecked(searchMoviesCheck)
+      setIsChecked(localSearchMoviesCheck)
     }
   }, [])
 

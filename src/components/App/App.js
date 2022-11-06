@@ -27,11 +27,19 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
   const {login, register, authorize, updateUser} = useMainApi();
   const {getMovies} = useMoviesData();
+
+  const getAllMovies = () => {
+    getMovies()
+      .then(res => {
+        if (res) {
+          localStorage.setItem('movies', JSON.stringify(res));
+        }
+      })
+  }
 
   const tokenCheck = useCallback(() => {
     const token = localStorage.getItem('token');
@@ -55,20 +63,8 @@ function App() {
     }
   }, [navigate]);
 
-
-  const getAllMovies = () => {
-    getMovies()
-      .then(res => {
-        if (res) {
-          setMovies(res);
-          localStorage.setItem('movies', JSON.stringify(res));
-        }
-      })
-  }
-
   useEffect(() => {
     tokenCheck();
-    getAllMovies();
   }, []);
 
   const onRegister = (name, email, password) => {
@@ -126,6 +122,10 @@ function App() {
 
   const signOut = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('searchMovies');
+    localStorage.removeItem('searchMoviesCheck');
+    localStorage.removeItem('moviesSearchString');
+    localStorage.removeItem('movies');
     navigate('/', {replace: true})
     setIsLoggedIn(false);
   }
@@ -138,7 +138,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<Main/>}/>
           <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
-            <Route path={'/movies'} element={<Movies/>}/>
+            <Route path={'/movies'} element={<Movies getMovies={getAllMovies}/>}/>
             <Route path={'/saved-movies'} element={<SavedMovies savedMovies={savedMovies}/>}/>
             <Route path={'/profile'}
                    element={<Profile isLoading={isLoading} onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
