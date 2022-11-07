@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Register.css';
 import logo from "../../images/header/logo.svg";
 import {Link} from "react-router-dom";
 import FormInput from "../FormInput/FormInput";
 import FormButton from "../FormButton/FormButton";
 import {useValidation} from "../../utils/useValidation";
+import Preloader from "../Preloader/Preloader";
 
 const initialValues = {
   name: '',
@@ -28,7 +29,7 @@ const validRegConfig = {
   }
 }
 
-const Register = ({onRegister}) => {
+const Register = ({isLoading, onRegister}) => {
   const {values, errors, handleChange, isValid} = useValidation(initialValues);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +37,7 @@ const Register = ({onRegister}) => {
     onRegister(name, email ,password);
   }
 
+  if (isLoading) return <Preloader/>
   return (
     <div className='register'>
       <div className="register__container">

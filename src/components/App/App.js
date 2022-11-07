@@ -64,9 +64,11 @@ function App() {
       authorize()
         .then(res => {
           if (res) {
+            if (pathname === '/signin' || pathname === '/signup') navigate('/', {replace: true});
             const {email, name} = res;
             setCurrentUser({email, name})
             setIsLoggedIn(true);
+            if (pathname === '/movies' || pathname === '/saved-movies') getSaveMovies();
           } else {
             setIsLoggedIn(false);
             localStorage.removeItem('token')
@@ -81,16 +83,13 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-    if (pathname === '/movies' || pathname === '/saved-movies') {
-      getSaveMovies();
-    }
   }, [pathname]);
 
   const onRegister = (name, email, password) => {
     register(name, email, password)
       .then(res => {
         if (res) {
-          navigate("/signin", {replace: true});
+          onLogin(email, password)
           setInfoPopupOption({popupOpen: true, popupType: "success"});
         } else {
           setInfoPopupOption({popupOpen: true, popupType: "failure"});
@@ -108,7 +107,7 @@ function App() {
         if (res) {
           setIsLoggedIn(true);
           localStorage.setItem('token', res.token);
-          navigate('/', {replace: true})
+          navigate('/movies', {replace: true})
         } else {
           setInfoPopupOption({popupOpen: true, popupType: "failure"})
         }
@@ -184,8 +183,8 @@ function App() {
             <Route path={'/profile'}
                    element={<Profile isLoading={isLoading} onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>
           </Route>
-          <Route path={"/signup"} element={<Register onRegister={onRegister}/>}/>
-          <Route path={"/signin"} element={<Login onLogin={onLogin}/>}/>
+          <Route path={"/signup"} element={<Register isLoading={isLoading} onRegister={onRegister}/>}/>
+          <Route path={"/signin"} element={<Login isLoading={isLoading} onLogin={onLogin}/>}/>
           <Route path={"*"} element={<PageNotFound/>}/>
         </Routes>
         {pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' ? <Footer/> : null}

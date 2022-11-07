@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Login.css';
 import logo from "../../images/header/logo.svg";
 import {Link} from "react-router-dom";
 import FormInput from "../FormInput/FormInput";
 import FormButton from "../FormButton/FormButton";
 import {useValidation} from "../../utils/useValidation";
+import Preloader from "../Preloader/Preloader";
 
 const initialValues = {
   email: '',
@@ -22,13 +23,14 @@ const validLoginConfig = {
 }
 
 
-const Login = ({onLogin}) => {
+const Login = ({isLoading, onLogin}) => {
   const {values, errors, handleChange, isValid} = useValidation(initialValues);
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(values.email, values.password);
   }
 
+  if (isLoading) return <Preloader/>
   return (
     <div className='login'>
       <div className="login__container">

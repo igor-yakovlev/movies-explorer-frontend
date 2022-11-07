@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import './Profile.css';
 import FormButton from "../FormButton/FormButton";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
@@ -23,21 +23,16 @@ const validRegConfig = {
 }
 
 const Profile = ({onUpdateUser, signOut, isLoading}) => {
-  const user = React.useContext(CurrentUserContext);
-  const [values, setValues] = useState(initialValues)
+  const {name, email} = React.useContext(CurrentUserContext);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    setValues({name: user.name, email: user.email})
-  }, [user])
+  useMemo(() => {
+    initialValues.name = name;
+    initialValues.email = email;
+  }, [name, email])
 
   const handleEditing = () => {
     setIsEditing(!isEditing);
-  }
-
-  const handleChange = ({target}) => {
-    const {name, value} = target
-    setValues(prevState => ({...prevState, [name]: value}))
   }
 
   const handleSubmit = (e) => {
@@ -46,25 +41,25 @@ const Profile = ({onUpdateUser, signOut, isLoading}) => {
     setIsEditing(false);
   }
 
-  const {errors, handleBlur, isValid} = useValidation();
+  const {errors, handleChange, values, isValid} = useValidation(initialValues);
 
   if (isLoading) return <Preloader/>
   return (
     <form className="profile form" noValidate onSubmit={handleSubmit}>
       <div className="profile__wrapper">
-        <h2 className={"profile__title"}>Привет, {user.name}!</h2>
+        <h2 className={"profile__title"}>Привет, {name}!</h2>
         <ProfileInput label={'Имя'} type={'text'} disabled={!isEditing} name={'name'} value={values.name}
-                      validConfig={validRegConfig.name} isValid={isValid} error={errors.name} onBlur={handleBlur}
+                      validConfig={validRegConfig.name} isValid={isValid} error={errors.name}
                       onChange={handleChange}/>
         <hr size={'1px'} color={'#E8E8E8'} width={'100%'} className={'profile__line'}/>
         <ProfileInput label={'Email'} type={'email'} disabled={!isEditing} name={'email'} value={values.email}
-                      validConfig={validRegConfig.email} isValid={isValid} error={errors.email} onBlur={handleBlur}
+                      validConfig={validRegConfig.email} isValid={isValid} error={errors.email}
                       onChange={handleChange}/>
       </div>
       <div className="profile__button-container">
         {isEditing ?
           <>
-            <span className="profile__error"></span>
+            <span className="profile__error">{errors.name || errors.email}</span>
             <FormButton disabled={!isValid}>Сохранить</FormButton>
           </>
           :

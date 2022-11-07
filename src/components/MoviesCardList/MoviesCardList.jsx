@@ -16,10 +16,15 @@ const MoviesCardList = ({ savedMovies = [], renderMoviesArr, handleToggleMovies}
           return <MoviesCard savedMovies={savedMovies} key={pathname === '/saved-movies' ? movie._id : movie.id} data={movie} handleToggleMovies={handleToggleMovies}/>
         })}
       </ul>
+      {pathname !== '/saved-movies' ? (
+        <div className="moviesCardList__wrapper">
+          {hasNewPage && <MoviesButton type={"button"} onClick={handleSetPage}>Ещё</MoviesButton>}
+        </div>
+       )
+        :
+        null
+      }
 
-      <div className="moviesCardList__wrapper">
-        {hasNewPage && <MoviesButton type={"button"} onClick={handleSetPage}>Ещё</MoviesButton>}
-      </div>
     </>
   )
 }
