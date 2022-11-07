@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './InfoPopup.css';
 import popupSuccess from "../../images/popup/popup__success.svg";
 import popupFailure from "../../images/popup/popup__failure.svg";
@@ -15,6 +15,11 @@ const popupMap = {
     text: "Что-то пошло не так! Попробуйте ещё раз.",
     alt: "Неудача",
   },
+  successChangeData: {
+    src: popupSuccess,
+    text: "Данные успешно изменены",
+    alt: "Успешно",
+  },
 };
 
 function getPopup(type) {
@@ -22,6 +27,22 @@ function getPopup(type) {
 }
 
 const InfoPopup= ({settings, onClose}) => {
+
+  useEffect(() => {
+    if (onClose) {
+      document.addEventListener('keydown', handleCloseEsc);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleCloseEsc);
+    };
+  }, [onClose]);
+
+  const handleCloseEsc = ({key}) => {
+    if (key === 'Escape') {
+      onClose()
+    }
+  }
+
     return (
       <div className={`popup  ${settings.popupOpen && "popup_opened"}`}>
         <div className="popup__container">

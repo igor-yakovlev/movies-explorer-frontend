@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import './Profile.css';
 import FormButton from "../FormButton/FormButton";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
@@ -23,7 +23,7 @@ const validRegConfig = {
 }
 
 const Profile = ({onUpdateUser, signOut, isLoading}) => {
-  const {name, email} = React.useContext(CurrentUserContext);
+  const {name, email} = useContext(CurrentUserContext);
   const [isEditing, setIsEditing] = useState(false);
 
   useMemo(() => {

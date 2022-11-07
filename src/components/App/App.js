@@ -123,10 +123,12 @@ function App() {
       .then(res => {
         if (res) {
           setCurrentUser({email, name})
+          setInfoPopupOption({popupOpen: true, popupType: "successChangeData"})
         }
       })
       .catch(e => {
         console.log(e)
+        setInfoPopupOption({popupOpen: true, popupType: "failure"})
       })
   }
 
