@@ -1,14 +1,16 @@
 import React from 'react';
 import './Techs.css';
 
-const Techs = ({}) => {
+function Techs() {
   return (
-    <section className="techs" id='techs'>
+    <section className="techs" id="techs">
       <h2 className="techs__title">Технологии</h2>
       <div className="techs__wrapper">
         <h2 className="techs__subtitle">7 технологий</h2>
-        <p className="techs__descr">На курсе веб-разработки мы освоили технологии, которые применили в дипломном
-          проекте.</p>
+        <p className="techs__descr">
+          На курсе веб-разработки мы освоили технологии, которые применили в дипломном
+          проекте.
+        </p>
         <ul className="techs__items">
           <li className="techs__item">HTML</li>
           <li className="techs__item">CSS</li>
@@ -20,7 +22,7 @@ const Techs = ({}) => {
         </ul>
       </div>
     </section>
-  )
+  );
 }
 
 export default Techs;

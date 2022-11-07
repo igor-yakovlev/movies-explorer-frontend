@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './Movies.css';
-import SearchForm from "../SearchForm/SearchForm";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import Preloader from "../Preloader/Preloader";
-
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
 
 const errorConfig = {
   errorName: 'Введите название фильма для поиска',
-  errorRequest: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного, перезагрузите страницу и попробуйте ещё раз',
+  errorRequest: 'Во время запроса произошла ошибка. '
+    + 'Возможно, проблема с соединением или сервер недоступен. Подождите немного, перезагрузите страницу и попробуйте ещё раз',
   errorNotFound: 'Ничего не найдено',
-}
+};
 
-
-const Movies = ({savedMovies, getMovies, handleToggleMovies, isLoading}) => {
+function Movies({
+  savedMovies, getMovies, handleToggleMovies, isLoading,
+}) {
   const [searchMovies, setSearchMovies] = useState([]);
   const [searchError, setSearchError] = useState(errorConfig.errorName);
   const [initialSearchString, setInitialSearchString] = useState('');
@@ -22,11 +23,10 @@ const Movies = ({savedMovies, getMovies, handleToggleMovies, isLoading}) => {
     const localMovies = JSON.parse(localStorage.getItem('movies'));
     const localSearchMovies = JSON.parse(localStorage.getItem('searchMovies'));
     const localSearchMoviesCheck = JSON.parse(localStorage.getItem('searchMoviesCheck'));
-    const localSearchString = localStorage.getItem('moviesSearchString')
-
+    const localSearchString = localStorage.getItem('moviesSearchString');
 
     if (!localMovies) {
-      getMovies()
+      getMovies();
     }
 
     if (localSearchString) {
@@ -34,76 +34,85 @@ const Movies = ({savedMovies, getMovies, handleToggleMovies, isLoading}) => {
     }
 
     if (localSearchMovies) {
-      setSearchError('')
-      setSearchMovies(localSearchMovies)
+      setSearchError('');
+      setSearchMovies(localSearchMovies);
     }
 
     if (localSearchMoviesCheck) {
-      const shortFilms = localSearchMovies.filter(movie => movie.duration <= 40);
+      const shortFilms = localSearchMovies.filter((movie) => movie.duration <= 40);
       setSearchMovies(shortFilms);
-      setIsChecked(localSearchMoviesCheck)
+      setIsChecked(localSearchMoviesCheck);
     }
-  }, [])
-
+  }, []);
 
   const handleSearchMovies = (searchString) => {
     try {
       if (searchString) {
         const movies = JSON.parse(localStorage.getItem('movies'));
-        const searchMovies = movies.filter(movie => movie.nameRU.toLowerCase().includes(searchString.toLowerCase()));
+        const searchMovies = movies.filter((movie) => movie.nameRU.toLowerCase().includes(searchString.toLowerCase()));
         if (!searchMovies.length) {
-          setSearchError(errorConfig.errorNotFound)
+          setSearchError(errorConfig.errorNotFound);
         } else {
-          setSearchError('')
-          localStorage.setItem('searchMovies', JSON.stringify(searchMovies))
+          setSearchError('');
+          localStorage.setItem('searchMovies', JSON.stringify(searchMovies));
           localStorage.setItem('moviesSearchString', searchString);
         }
-        setSearchMovies(searchMovies)
+        setSearchMovies(searchMovies);
       } else {
-        localStorage.setItem('searchMovies', JSON.stringify([]))
+        localStorage.setItem('searchMovies', JSON.stringify([]));
         localStorage.setItem('moviesSearchString', searchString);
         setSearchMovies([]);
-        setSearchError(errorConfig.errorName)
+        setSearchError(errorConfig.errorName);
       }
     } catch (e) {
-      setSearchError(errorConfig.errorRequest)
+      setSearchError(errorConfig.errorRequest);
     }
-  }
+  };
 
   const getFilteredMovies = (isChecked) => {
-    setIsChecked(isChecked)
+    setIsChecked(isChecked);
     if (isChecked) {
       if (searchMovies.length) {
-        const shortFilms = searchMovies.filter(movie => movie.duration <= 40);
+        const shortFilms = searchMovies.filter((movie) => movie.duration <= 40);
         setSearchMovies(shortFilms);
-        if (!shortFilms.length) setSearchError(errorConfig.errorNotFound)
+        if (!shortFilms.length) setSearchError(errorConfig.errorNotFound);
       }
     } else {
       const searchMovies = JSON.parse(localStorage.getItem('searchMovies'));
       if (searchMovies) {
         setSearchMovies(searchMovies);
-        setSearchError('')
+        setSearchError('');
       }
     }
     localStorage.setItem('searchMoviesCheck', isChecked);
-  }
+  };
 
   return (
-    <section className='movies'>
-      <SearchForm setSearchError={setSearchError} initialSearchValue={initialSearchString} onSubmit={handleSearchMovies} onCheck={getFilteredMovies}
-                  isChecked={isChecked}/>
-      <hr color={'#E8E8E8'} size={'1px'} width={'100%'} className={'movies__line'}/>
-      {isLoading ? <Preloader/> :
-        searchMovies.length === 0 ?
-          <section className="movies__error-block">
-            <p className={'movies__error-text'}>{searchError}</p>
-          </section>
-          :
-          <MoviesCardList savedMovies={savedMovies} renderMoviesArr={searchMovies}
-                          handleToggleMovies={handleToggleMovies}/>
-      }
+    <section className="movies">
+      <SearchForm
+        setSearchError={setSearchError}
+        initialSearchValue={initialSearchString}
+        onSubmit={handleSearchMovies}
+        onCheck={getFilteredMovies}
+        isChecked={isChecked}
+      />
+      <hr color="#E8E8E8" size="1px" width="100%" className="movies__line" />
+      {isLoading ? <Preloader />
+        : searchMovies.length === 0
+          ? (
+            <section className="movies__error-block">
+              <p className="movies__error-text">{searchError}</p>
+            </section>
+          )
+          : (
+            <MoviesCardList
+              savedMovies={savedMovies}
+              renderMoviesArr={searchMovies}
+              handleToggleMovies={handleToggleMovies}
+            />
+          )}
     </section>
-  )
+  );
 }
 
 export default Movies;

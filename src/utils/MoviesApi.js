@@ -1,25 +1,21 @@
 const BASE_URL = 'https://api.nomoreparties.co';
-const headers = () => ({"Content-type": "application/json",});
+const headers = () => ({ 'Content-type': 'application/json' });
 
-export function useMoviesData () {
+export default function useMoviesData() {
   return {
-    getMovies: () => {
-    return fetch(`${BASE_URL}/beatfilm-movies`, {
+    getMovies: () => fetch(`${BASE_URL}/beatfilm-movies`, {
       method: 'GET',
       headers: headers(),
     })
-      .then(response => {
+      .then((response) => {
         try {
           if (response.ok) {
-            return response.json()
+            return response.json();
           }
         } catch (e) {
-          return e
+          return e;
         }
       })
-      .then(data => {
-        return data
-      })
-  },
-}
+      .then((data) => data),
+  };
 }

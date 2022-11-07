@@ -1,12 +1,11 @@
 import React from 'react';
-import {Navigate, Outlet} from "react-router-dom";
+import { Navigate, Outlet } from 'react-router-dom';
 
-
-const ProtectedRoutes = ({loggedIn}) => {
+function ProtectedRoutes({ loggedIn }) {
   const token = localStorage.getItem('token');
   return (
-    token ? <Outlet/> : <Navigate to={'/'}/>
-  )
+    (token || loggedIn) ? <Outlet /> : <Navigate to="/" />
+  );
 }
 
 export default ProtectedRoutes;
