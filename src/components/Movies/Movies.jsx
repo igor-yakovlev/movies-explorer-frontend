@@ -12,12 +12,11 @@ const errorConfig = {
 }
 
 
-const Movies = ({savedMovies, getMovies, handleToggleMovies}) => {
+const Movies = ({savedMovies, getMovies, handleToggleMovies, isLoading}) => {
   const [searchMovies, setSearchMovies] = useState([]);
   const [searchError, setSearchError] = useState(errorConfig.errorName);
   const [initialSearchString, setInitialSearchString] = useState('');
   const [isChecked, setIsChecked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const localMovies = JSON.parse(localStorage.getItem('movies'));
@@ -48,7 +47,6 @@ const Movies = ({savedMovies, getMovies, handleToggleMovies}) => {
 
 
   const handleSearchMovies = (searchString) => {
-    setIsLoading(true);
     try {
       if (searchString) {
         const movies = JSON.parse(localStorage.getItem('movies'));
@@ -69,8 +67,6 @@ const Movies = ({savedMovies, getMovies, handleToggleMovies}) => {
       }
     } catch (e) {
       setSearchError(errorConfig.errorRequest)
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -92,10 +88,9 @@ const Movies = ({savedMovies, getMovies, handleToggleMovies}) => {
     localStorage.setItem('searchMoviesCheck', isChecked);
   }
 
-
   return (
     <section className='movies'>
-      <SearchForm initialSearchValue={initialSearchString} onSubmit={handleSearchMovies} onCheck={getFilteredMovies}
+      <SearchForm setSearchError={setSearchError} initialSearchValue={initialSearchString} onSubmit={handleSearchMovies} onCheck={getFilteredMovies}
                   isChecked={isChecked}/>
       <hr color={'#E8E8E8'} size={'1px'} width={'100%'} className={'movies__line'}/>
       {isLoading ? <Preloader/> :

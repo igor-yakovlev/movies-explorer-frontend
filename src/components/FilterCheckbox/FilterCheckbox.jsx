@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import './FilterCheckbox.css';
+import {useLocation, useNavigate} from "react-router-dom";
 
 
-const FilterCheckbox = ({id, name, htmlFor, onCheck, isChecked}) => {
-
+const FilterCheckbox = ({disabledValue = false, id, name, htmlFor, onCheck, isChecked}) => {
+const {pathname} = useLocation();
 
   const handleChecked = () => {
+    if (pathname === '/movies' || pathname === '/saved-movies') {
+      if (!disabledValue) return
+    }
     onCheck(!isChecked);
   }
 

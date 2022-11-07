@@ -66,7 +66,7 @@ const SavedMovies = ({savedMovies, isLoading, handleToggleMovies}) => {
                   onCheck={getFilteredMovies}/>
       <hr color={'#E8E8E8'} size={'1px'} width={'100%'} className={'movies__line'}/>
       {isLoading ? <Preloader/> :
-        savedMovies.length === 0 ?
+        foundSavedMovies.length === 0 ?
           <section className="movies__error-block">
             <p className={'movies__error-text'}>{searchError}</p>
           </section>

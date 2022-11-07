@@ -53,6 +53,10 @@
   background: #3d4c95;
 }
 
+.searchForm__button:disabled {
+  background: #A0A0A0;
+}
+
 
 
 .searchForm__button:after {

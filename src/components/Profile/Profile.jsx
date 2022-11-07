@@ -42,7 +42,7 @@ const Profile = ({onUpdateUser, signOut, isLoading}) => {
   }
 
   const {errors, handleChange, values, isValid} = useValidation(initialValues);
-
+  console.log(errors)
   if (isLoading) return <Preloader/>
   return (
     <form className="profile form" noValidate onSubmit={handleSubmit}>

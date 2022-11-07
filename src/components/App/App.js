@@ -33,6 +33,7 @@ function App() {
   const {getMovies} = useMoviesData();
 
   const getAllMovies = () => {
+    setIsLoading(true)
     getMovies()
       .then(res => {
         if (res) {
@@ -42,6 +43,7 @@ function App() {
       .catch(e => {
         console.log(e)
       })
+      .finally( () => setIsLoading(false))
   }
   const getSaveMovies = () => {
     setIsLoading(true)
@@ -64,6 +66,7 @@ function App() {
       authorize()
         .then(res => {
           if (res) {
+            const movies = JSON.parse(localStorage.getItem('movies'))
             if (pathname === '/signin' || pathname === '/signup') navigate('/', {replace: true});
             const {email, name} = res;
             setCurrentUser({email, name})
@@ -72,6 +75,10 @@ function App() {
           } else {
             setIsLoggedIn(false);
             localStorage.removeItem('token')
+            localStorage.removeItem('searchMovies');
+            localStorage.removeItem('searchMoviesCheck');
+            localStorage.removeItem('moviesSearchString');
+            localStorage.removeItem('movies');
           }
         })
         .catch(e => {
@@ -180,7 +187,7 @@ function App() {
           <Route path={'/'} element={<Main/>}/>
           <Route element={<ProtectedRoutes loggedIn={isLoggedIn}/>}>
             <Route path={'/movies'}
-                   element={<Movies savedMovies={savedMovies} getMovies={getAllMovies} handleToggleMovies={handleToggleMovies}/>}/>
+                   element={<Movies isLoading={isLoading} savedMovies={savedMovies} getMovies={getAllMovies} handleToggleMovies={handleToggleMovies}/>}/>
             <Route path={'/saved-movies'} element={<SavedMovies isLoading={isLoading} savedMovies={savedMovies} handleToggleMovies={handleToggleMovies}/>}/>
             <Route path={'/profile'}
                    element={<Profile isLoading={isLoading} onUpdateUser={handleUpdateUser} signOut={signOut}/>}/>

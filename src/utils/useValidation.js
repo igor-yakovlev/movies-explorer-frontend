@@ -4,21 +4,22 @@ export function useValidation(initialValues) {
   const [isValid, setIsValid] = useState(false);
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
-  const handleChange = ({target}) => {
-    const {validationMessage, name, value, setCustomValidity} = target;
+  const handleChange = (e) => {
+    const {name, value} = e.target;
     setValues(prevState => ({...prevState, [name]: value}))
-    if (value === initialValues[name]) {
+    if (value === initialValues[name] && value !== '') {
       setIsValid(false);
-      setErrors(prevState => ({...prevState, [name]: 'Введены теже данные'}))
-      setCustomValidity('Введены теже данные');
+      e.target.setCustomValidity('Введены теже данные');
+    } else {
+      e.target.setCustomValidity('');
     }
-    if (validationMessage) {
-      setErrors(prevState => ({...prevState, [name]: validationMessage}));
+    if (e.target.validationMessage) {
+      setErrors(prevState => ({...prevState, [name]: e.target.validationMessage}));
       setIsValid(false)
     } else {
       setErrors(prevState => ({...prevState, [name]: ''}))
     }
-    if (target.closest('.form').checkValidity()) setIsValid(true);
+    if (e.target.closest('.form').checkValidity()) setIsValid(true);
   }
 
   return {values, isValid, errors, handleChange}
