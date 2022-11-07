@@ -17,7 +17,7 @@ function Movies({
   const [searchMovies, setSearchMovies] = useState([]);
   const [searchError, setSearchError] = useState(errorConfig.errorName);
   const [initialSearchString, setInitialSearchString] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
+  const [isFiltered, sitIsFiltered] = useState(false);
 
   useEffect(() => {
     const localMovies = JSON.parse(localStorage.getItem('movies'));
@@ -41,7 +41,7 @@ function Movies({
     if (localSearchMoviesCheck) {
       const shortFilms = localSearchMovies.filter((movie) => movie.duration <= 40);
       setSearchMovies(shortFilms);
-      setIsChecked(localSearchMoviesCheck);
+      sitIsFiltered(localSearchMoviesCheck);
     }
   }, []);
 
@@ -49,15 +49,15 @@ function Movies({
     try {
       if (searchString) {
         const movies = JSON.parse(localStorage.getItem('movies'));
-        const searchMovies = movies.filter((movie) => movie.nameRU.toLowerCase().includes(searchString.toLowerCase()));
-        if (!searchMovies.length) {
+        const filteredMovies = movies.filter((movie) => movie.nameRU.toLowerCase().includes(searchString.toLowerCase()));
+        if (!filteredMovies.length) {
           setSearchError(errorConfig.errorNotFound);
         } else {
           setSearchError('');
-          localStorage.setItem('searchMovies', JSON.stringify(searchMovies));
+          localStorage.setItem('searchMovies', JSON.stringify(filteredMovies));
           localStorage.setItem('moviesSearchString', searchString);
         }
-        setSearchMovies(searchMovies);
+        setSearchMovies(filteredMovies);
       } else {
         localStorage.setItem('searchMovies', JSON.stringify([]));
         localStorage.setItem('moviesSearchString', searchString);
@@ -70,7 +70,7 @@ function Movies({
   };
 
   const getFilteredMovies = (isChecked) => {
-    setIsChecked(isChecked);
+    sitIsFiltered(isChecked);
     if (isChecked) {
       if (searchMovies.length) {
         const shortFilms = searchMovies.filter((movie) => movie.duration <= 40);
@@ -78,9 +78,9 @@ function Movies({
         if (!shortFilms.length) setSearchError(errorConfig.errorNotFound);
       }
     } else {
-      const searchMovies = JSON.parse(localStorage.getItem('searchMovies'));
-      if (searchMovies) {
-        setSearchMovies(searchMovies);
+      const localSearchMovies = JSON.parse(localStorage.getItem('searchMovies'));
+      if (localSearchMovies) {
+        setSearchMovies(localSearchMovies);
         setSearchError('');
       }
     }
@@ -94,7 +94,7 @@ function Movies({
         initialSearchValue={initialSearchString}
         onSubmit={handleSearchMovies}
         onCheck={getFilteredMovies}
-        isChecked={isChecked}
+        isChecked={isFiltered}
       />
       <hr color="#E8E8E8" size="1px" width="100%" className="movies__line" />
       {isLoading ? <Preloader />

@@ -8,7 +8,7 @@ const validSearchConfig = {
 };
 
 function SearchForm({
-  setSearchError, initialSearchValue = '', onSubmit, onCheck, isChecked,
+  initialSearchValue = '', onSubmit, onCheck, isChecked,
 }) {
   const [searchString, setSearchString] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -20,7 +20,7 @@ function SearchForm({
   }, [initialSearchValue]);
 
   const handleChange = ({ target }) => {
-    const { validationMessage, value, setCustomValidity } = target;
+    const { validationMessage, value } = target;
     setSearchString(value);
 
     if (validationMessage) {
@@ -50,7 +50,7 @@ function SearchForm({
           {...validSearchConfig}
           className="searchForm__input"
         />
-        <button disabled={!isValid} className="searchForm__button" />
+        <button label="search" type="submit" disabled={!isValid} className="searchForm__button" />
       </div>
       <div className="searchForm__vl-container">
         <div className="searchForm__vl" />

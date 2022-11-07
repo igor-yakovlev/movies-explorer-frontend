@@ -23,7 +23,7 @@ function MoviesCardList({ savedMovies = [], renderMoviesArr, handleToggleMovies 
       </ul>
       {pathname !== '/saved-movies' ? (
         <div className="moviesCardList__wrapper">
-          {hasNewPage && <MoviesButton type="button" onClick={handleSetPage}>Ещё</MoviesButton>}
+          {hasNewPage && <MoviesButton onClick={handleSetPage}>Ещё</MoviesButton>}
         </div>
       )
         : null}

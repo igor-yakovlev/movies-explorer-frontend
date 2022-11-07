@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilterCheckbox.css';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function FilterCheckbox({
   disabledValue = false, id, name, htmlFor, onCheck, isChecked,
@@ -15,7 +15,8 @@ function FilterCheckbox({
   };
 
   return (
-    <div className="filterSwitch" onClick={handleChecked}>
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
+    <div role="checkbox" aria-checked className="filterSwitch" onClick={handleChecked} onKeyDown={handleChecked}>
       <input
         type="checkbox"
         checked={isChecked}
@@ -24,6 +25,7 @@ function FilterCheckbox({
         name={name}
         id={id}
       />
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="filterSwitch__label" htmlFor={htmlFor}>
         <span className="filterSwitch__inner" />
         <span className="filterSwitch__switch" />

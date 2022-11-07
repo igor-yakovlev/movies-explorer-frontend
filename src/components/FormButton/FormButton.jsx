@@ -3,7 +3,7 @@ import './FormButton.css';
 
 function FormButton({ children, disabled }) {
   return (
-    <button disabled={disabled} className="formButton">{children}</button>
+    <button type="submit" disabled={disabled} className="formButton">{children}</button>
   );
 }
 

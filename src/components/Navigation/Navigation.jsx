@@ -42,7 +42,7 @@ function Navigation({ isLoggedIn }) {
               <Link to="/profile" className="navigation__account-link">
                 Аккаунт
               </Link>
-              <button type="button" className="navigation__menu-button" onClick={handleOpenMenu} />
+              <button label="nav" type="button" className="navigation__menu-button" onClick={handleOpenMenu} />
             </div>
           )}
       </nav>

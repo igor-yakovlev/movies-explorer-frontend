@@ -1,10 +1,10 @@
 import React from 'react';
 import './MoviesButton.css';
 
-const MoviesButton = ({children, type, onClick}) => {
+function MoviesButton({ children, onClick }) {
   return (
-    <button type={type} className="moviesButton" onClick={onClick}>{children}</button>
-  )
+    <button type="button" className="moviesButton" onClick={onClick}>{children}</button>
+  );
 }
 
 export default MoviesButton;

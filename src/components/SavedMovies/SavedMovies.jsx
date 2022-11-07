@@ -6,14 +6,14 @@ import Preloader from '../Preloader/Preloader';
 
 const errorConfig = {
   errorNull: 'У вас нет сохраненных фильмов',
-  errorRequest: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного, перезагрузите страницу и попробуйте ещё раз',
+  errorRequest: 'Во время запроса произошла ошибка. '
+    + 'Возможно, проблема с соединением или сервер недоступен. Подождите немного, перезагрузите страницу и попробуйте ещё раз',
   errorNotFound: 'Ничего не найдено',
 };
 
 function SavedMovies({ savedMovies, isLoading, handleToggleMovies }) {
   const [searchError, setSearchError] = useState(errorConfig.errorNull);
-  const [initialSearchString, setInitialSearchString] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
   const [foundSavedMovies, setFoundSavedMovies] = useState([]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function SavedMovies({ savedMovies, isLoading, handleToggleMovies }) {
   };
 
   const getFilteredMovies = (isChecked) => {
-    setIsChecked(isChecked);
+    setIsFiltered(isChecked);
     if (isChecked) {
       if (foundSavedMovies.length) {
         const shortFilms = foundSavedMovies.filter((movie) => movie.duration <= 40);
@@ -60,9 +60,9 @@ function SavedMovies({ savedMovies, isLoading, handleToggleMovies }) {
   return (
     <section className="savedMovies">
       <SearchForm
-        initialSearchValue={initialSearchString}
+        initialSearchValue=""
         onSubmit={handleSearchMovies}
-        isChecked={isChecked}
+        isChecked={isFiltered}
         onCheck={getFilteredMovies}
       />
       <hr color="#E8E8E8" size="1px" width="100%" className="movies__line" />

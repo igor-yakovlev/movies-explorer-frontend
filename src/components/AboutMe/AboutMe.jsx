@@ -23,7 +23,7 @@ function AboutMe() {
           <a href="https://vk.com/id66345979" target="_blank" className="aboutMe__link" rel="noreferrer">Вконтакте</a>
           <a href="https://github.com/igor-yakovlev" target="_blank" className="aboutMe__link" rel="noreferrer">Github</a>
         </div>
-        <img src={photo} alt="User photo" className="aboutMe__img" />
+        <img src={photo} alt="User" className="aboutMe__img" />
       </div>
       <h3 className="aboutMe__portfolio-title">Портфолио</h3>
       <ul className="aboutMe__portfolio-items">
