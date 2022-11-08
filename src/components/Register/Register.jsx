@@ -31,19 +31,22 @@ const validRegConfig = {
 
 function Register({ isLoading, onRegister }) {
   const {
-    values, errors, handleChange, isValid,
+    values, errors, handleChange, isValid, resetValid,
   } = useValidation(initialValues);
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = values;
     onRegister(name, email, password);
+    resetValid();
   };
 
   if (isLoading) return <Preloader />;
   return (
     <div className="register">
       <div className="register__container">
-        <img src={logo} alt="Logo" className="register__logo" />
+        <Link to="/" className="register__logo">
+          <img src={logo} alt="Logo" />
+        </Link>
         <h2 className="register__title">Добро пожаловать!</h2>
         <form onSubmit={handleSubmit} action="#" className="register__form form" noValidate>
           <FormInput
@@ -57,10 +60,9 @@ function Register({ isLoading, onRegister }) {
             name="name"
           />
           <FormInput
-            type="email"
+            type="text"
             label="E-mail"
             value={values.email}
-            validConfig={validRegConfig.email}
             isValid={isValid}
             error={errors.email}
             onChange={handleChange}

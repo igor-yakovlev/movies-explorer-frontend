@@ -8,7 +8,6 @@ function FormInput({
     <div className="formInput__input-wrapper">
       <label htmlFor={name} className="formInput__label">{label}</label>
       <input
-        required
         type={type}
         name={name}
         value={value}

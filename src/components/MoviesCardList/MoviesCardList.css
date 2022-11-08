@@ -2,9 +2,11 @@
   margin-top: 69px;
   list-style-type: none;
   display: grid;
+  padding: 0;
   grid-template-columns: repeat(auto-fill, 364px);
   grid-template-rows: repeat(auto-fill, 271px);
   gap: 30px 24px;
+  justify-content: center;
 }
 
 .moviesCardList__wrapper {
@@ -16,10 +18,12 @@
 
 @media screen and (max-width: 900px) {
   .moviesCardList {
+    padding: 0;
     margin-top: 109px;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 330px) );
+    grid-template-columns: repeat(auto-fill, minmax(290px, 330px));
     grid-template-rows: repeat(auto-fill, minmax(220px, 258px));
     gap: 36px 30px;
+    justify-content: center;
   }
 }
 

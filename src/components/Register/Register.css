@@ -11,15 +11,11 @@
   width: 396px;
 }
 
-.register__logo {
-  margin-bottom: 38px;
-}
-
 .register__title {
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  margin-bottom: 40px;
+  margin: 40px 0px;
 }
 
 .register__form-wrapper {

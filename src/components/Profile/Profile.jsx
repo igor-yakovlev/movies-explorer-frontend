@@ -36,13 +36,14 @@ function Profile({ onUpdateUser, signOut, isLoading }) {
   };
 
   const {
-    errors, handleChange, values, isValid,
+    errors, handleChange, values, isValid, resetValid,
   } = useValidation(initialValues);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateUser(values.email, values.name);
     setIsEditing(false);
+    resetValid();
   };
 
   if (isLoading) return <Preloader />;

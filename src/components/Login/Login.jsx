@@ -13,9 +13,6 @@ const initialValues = {
 };
 
 const validLoginConfig = {
-  email: {
-    required: true,
-  },
   password: {
     required: true,
     minLength: 3,
@@ -24,25 +21,27 @@ const validLoginConfig = {
 
 function Login({ isLoading, onLogin }) {
   const {
-    values, errors, handleChange, isValid,
+    values, errors, handleChange, isValid, resetValid,
   } = useValidation(initialValues);
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(values.email, values.password);
+    resetValid();
   };
 
   if (isLoading) return <Preloader />;
   return (
     <div className="login">
       <div className="login__container">
-        <img src={logo} alt="Logo" className="login__logo" />
+        <Link to="/" className="login__logo">
+          <img src={logo} alt="Logo" className="login__logo" />
+        </Link>
         <h2 className="login__title">Рады видеть!</h2>
         <form onSubmit={handleSubmit} className="login__form form" noValidate>
           <FormInput
             type="email"
             label="E-mail"
             value={values.email}
-            validConfig={validLoginConfig.email}
             isValid={isValid}
             error={errors.email}
             onChange={handleChange}
