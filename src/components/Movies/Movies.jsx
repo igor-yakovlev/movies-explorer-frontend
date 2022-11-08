@@ -3,6 +3,7 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
+import { SHORT_FILM_DURATION } from '../../constants/constants';
 
 const errorConfig = {
   errorName: 'Введите название фильма для поиска',
@@ -39,7 +40,7 @@ function Movies({
     }
 
     if (localSearchMoviesCheck) {
-      const shortFilms = localSearchMovies.filter((movie) => movie.duration <= 40);
+      const shortFilms = localSearchMovies.filter((movie) => movie.duration <= SHORT_FILM_DURATION);
       setSearchMovies(shortFilms);
       sitIsFiltered(localSearchMoviesCheck);
     }
@@ -58,9 +59,8 @@ function Movies({
           localStorage.setItem('moviesSearchString', searchString);
         }
         setSearchMovies(filteredMovies);
-        console.log(searchMovies);
         if (isFiltered) {
-          setSearchMovies(filteredMovies.filter((movie) => movie.duration <= 40));
+          setSearchMovies(filteredMovies.filter((movie) => movie.duration <= SHORT_FILM_DURATION));
         }
       } else {
         localStorage.setItem('searchMovies', JSON.stringify([]));
@@ -77,7 +77,7 @@ function Movies({
     sitIsFiltered(isChecked);
     if (isChecked) {
       if (searchMovies.length) {
-        const shortFilms = searchMovies.filter((movie) => movie.duration <= 40);
+        const shortFilms = searchMovies.filter((movie) => movie.duration <= SHORT_FILM_DURATION);
         setSearchMovies(shortFilms);
         if (!shortFilms.length) setSearchError(errorConfig.errorNotFound);
       }

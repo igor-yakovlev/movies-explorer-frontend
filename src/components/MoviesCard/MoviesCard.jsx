@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import buttonIcon from '../../images/moviesCard/moviesCard__button.svg';
@@ -11,29 +11,20 @@ const getTime = (time) => {
   return `${hours}ч ${minutes}м`;
 };
 
-const getImage = (url) => ` https://api.nomoreparties.co/${url}`;
+const getImage = (url) => `https://api.nomoreparties.co/${url}`;
 
 function MoviesCard({ savedMovies = [], data, handleToggleMovies }) {
   const { pathname } = useLocation();
   const {
     nameRU, duration, image, trailerLink,
   } = data;
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    if (pathname === '/movies') {
-      const isSaved = savedMovies.some((movie) => movie.movieId === data.id);
-      setActive(isSaved);
-    }
-  }, [savedMovies]);
 
   const handleClick = () => {
-    setActive(!active);
     handleToggleMovies(data);
   };
-
-  const buttonClassName = `moviesCard__button ${active && 'moviesCard__button_active'}`;
-  const imgClassName = active ? buttonIconActive : buttonIcon;
+  const isSaved = savedMovies.some((movie) => movie.movieId === data.id);
+  const buttonClassName = `moviesCard__button ${isSaved && 'moviesCard__button_active'}`;
+  const imgClassName = isSaved ? buttonIconActive : buttonIcon;
 
   return (
     <li className="moviesCard">

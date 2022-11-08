@@ -1,24 +1,5 @@
 import { useEffect, useState } from 'react';
-
-const config = {
-  width: {
-    WIDTH_XL_SIZE: 1280,
-    WIDTH_LG_SIZE: 960,
-    WIDTH_MD_SIZE: 768,
-    WIDTH_ES_SIZE: 320,
-  },
-  render: {
-    AMOUNT_MOVIES_XL_RENDER: 12,
-    AMOUNT_MOVIES_LG_RENDER: 8,
-    AMOUNT_MOVIES_MD_RENDER: 8,
-    AMOUNT_MOVIES_ES_RENDER: 5,
-  },
-  add: {
-    AMOUNT_MOVIES_ADD_XL: 3,
-    AMOUNT_MOVIES_ADD_LG: 2,
-    AMOUNT_MOVIES_ADD_MD: 2,
-  },
-};
+import { configBreakingPoints } from '../constants/constants';
 
 function getTotal(array, initialRender, amountAdd) {
   if (array.length - initialRender < 0) {
@@ -50,18 +31,18 @@ export default function usePagination(array) {
   }, []);
 
   const getMoviesRender = () => {
-    if (widthSize >= config.width.WIDTH_XL_SIZE) {
-      setAmountMoviesRender(config.render.AMOUNT_MOVIES_XL_RENDER);
-      setAmountMoviesAdd(config.add.AMOUNT_MOVIES_ADD_XL);
-    } else if (widthSize < config.width.WIDTH_XL_SIZE && widthSize >= config.width.WIDTH_LG_SIZE) {
-      setAmountMoviesRender(config.render.AMOUNT_MOVIES_LG_RENDER);
-      setAmountMoviesAdd(config.add.AMOUNT_MOVIES_ADD_LG);
-    } else if (widthSize < config.width.WIDTH_LG_SIZE && widthSize >= config.width.WIDTH_MD_SIZE) {
-      setAmountMoviesRender(config.render.AMOUNT_MOVIES_MD_RENDER);
-      setAmountMoviesAdd(config.add.AMOUNT_MOVIES_ADD_MD);
-    } else if (widthSize < config.width.WIDTH_MD_SIZE && widthSize >= config.width.WIDTH_ES_SIZE) {
-      setAmountMoviesRender(config.render.AMOUNT_MOVIES_ES_RENDER);
-      setAmountMoviesAdd(config.add.AMOUNT_MOVIES_ADD_MD);
+    if (widthSize >= configBreakingPoints.width.WIDTH_XL_SIZE) {
+      setAmountMoviesRender(configBreakingPoints.render.AMOUNT_MOVIES_XL_RENDER);
+      setAmountMoviesAdd(configBreakingPoints.add.AMOUNT_MOVIES_ADD_XL);
+    } else if (widthSize < configBreakingPoints.width.WIDTH_XL_SIZE && widthSize >= configBreakingPoints.width.WIDTH_LG_SIZE) {
+      setAmountMoviesRender(configBreakingPoints.render.AMOUNT_MOVIES_LG_RENDER);
+      setAmountMoviesAdd(configBreakingPoints.add.AMOUNT_MOVIES_ADD_LG);
+    } else if (widthSize < configBreakingPoints.width.WIDTH_LG_SIZE && widthSize >= configBreakingPoints.width.WIDTH_MD_SIZE) {
+      setAmountMoviesRender(configBreakingPoints.render.AMOUNT_MOVIES_MD_RENDER);
+      setAmountMoviesAdd(configBreakingPoints.add.AMOUNT_MOVIES_ADD_MD);
+    } else if (widthSize < configBreakingPoints.width.WIDTH_MD_SIZE && widthSize >= configBreakingPoints.width.WIDTH_ES_SIZE) {
+      setAmountMoviesRender(configBreakingPoints.render.AMOUNT_MOVIES_ES_RENDER);
+      setAmountMoviesAdd(configBreakingPoints.add.AMOUNT_MOVIES_ADD_MD);
     }
   };
 

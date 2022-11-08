@@ -94,7 +94,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, [pathname]);
+  }, []);
 
   const onLogin = (email, password) => {
     login(email, password)
@@ -143,6 +143,16 @@ function App() {
       });
   };
 
+  const signOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('searchMovies');
+    localStorage.removeItem('searchMoviesCheck');
+    localStorage.removeItem('moviesSearchString');
+    localStorage.removeItem('movies');
+    navigate('/', { replace: true });
+    setIsLoggedIn(false);
+  };
+
   const handleToggleMovies = (movie) => {
     const isSaved = savedMovies.some((film) => film.movieId === movie.movieId || film.movieId === movie.id);
     if (isSaved) {
@@ -155,6 +165,8 @@ function App() {
         })
         .catch((e) => {
           console.log(e);
+          setInfoPopupOption({ popupOpen: true, popupType: 'failureAddLike' });
+          signOut();
         });
     } else {
       addMovie(movie)
@@ -172,16 +184,6 @@ function App() {
 
   const closePopup = () => {
     setInfoPopupOption((state) => ({ ...state, popupOpen: false }));
-  };
-
-  const signOut = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('searchMovies');
-    localStorage.removeItem('searchMoviesCheck');
-    localStorage.removeItem('moviesSearchString');
-    localStorage.removeItem('movies');
-    navigate('/', { replace: true });
-    setIsLoggedIn(false);
   };
 
   return (

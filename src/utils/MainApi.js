@@ -10,13 +10,10 @@ export default function useMainApi() {
       body: JSON.stringify({ name, email, password }),
     })
       .then((response) => {
-        try {
           if (response.status === 201) {
             return response.json();
           }
-        } catch (e) {
-          return e;
-        }
+        return Promise.reject(`Ошибка ${response.status}`);
       })
       .then((data) => data),
     login: (email, password) => fetch(`${BASE_URL}/signin`, {
@@ -26,13 +23,11 @@ export default function useMainApi() {
       body: JSON.stringify({ email, password }),
     })
       .then((response) => {
-        try {
-          if (response.status === 200) {
+          if (response.ok) {
             return response.json();
           }
-        } catch (e) {
-          return e;
-        }
+        return Promise.reject(`Ошибка ${response.status}`);
+
       })
       .then((data) => data),
     authorize: () => fetch(`${BASE_URL}/users/me`, {
@@ -41,13 +36,10 @@ export default function useMainApi() {
       credentials: 'include',
     })
       .then((response) => {
-        try {
-          if (response.status === 200) {
+          if (response.ok ) {
             return response.json();
           }
-        } catch (e) {
-          return e;
-        }
+        return Promise.reject(`Ошибка ${response.status}`);
       })
       .then((data) => data),
     updateUser: (email, name) => fetch(`${BASE_URL}/users/me`, {
@@ -57,13 +49,10 @@ export default function useMainApi() {
       body: JSON.stringify({ email, name }),
     })
       .then((response) => {
-        try {
           if (response.ok) {
             return response.json();
           }
-        } catch (e) {
-          return e;
-        }
+          return Promise.reject(`Ошибка ${response.status}`);
       })
       .then((data) => data),
     addMovie: (movie) => fetch(`${BASE_URL}/movies`, {
@@ -85,13 +74,10 @@ export default function useMainApi() {
       }),
     })
       .then((response) => {
-        try {
           if (response.ok) {
             return response.json();
           }
-        } catch (e) {
-          return e;
-        }
+        return Promise.reject(`Ошибка ${response.status}`);
       })
       .then((data) => data),
     getSavedMovies: () => fetch(`${BASE_URL}/movies`, {
@@ -100,13 +86,10 @@ export default function useMainApi() {
       credentials: 'include',
     })
       .then((response) => {
-        try {
           if (response.status === 200) {
             return response.json();
           }
-        } catch (e) {
-          return e;
-        }
+        return Promise.reject(`Ошибка ${response.status}`);
       })
       .then((data) => data),
     deleteSavedMovies: (id) => fetch(`${BASE_URL}/movies/${id}`, {
@@ -115,13 +98,10 @@ export default function useMainApi() {
       credentials: 'include',
     })
       .then((response) => {
-        try {
           if (response.ok) {
             return response.json();
           }
-        } catch (e) {
-          return e;
-        }
+        return Promise.reject(`Ошибка ${response.status}`);
       })
       .then((data) => data)
   };

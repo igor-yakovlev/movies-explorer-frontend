@@ -3,6 +3,7 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
+import { SHORT_FILM_DURATION } from '../../constants/constants';
 
 const errorConfig = {
   errorNull: 'У вас нет сохраненных фильмов',
@@ -46,7 +47,7 @@ function SavedMovies({ savedMovies, isLoading, handleToggleMovies }) {
     setIsFiltered(isChecked);
     if (isChecked) {
       if (foundSavedMovies.length) {
-        const shortFilms = foundSavedMovies.filter((movie) => movie.duration <= 40);
+        const shortFilms = foundSavedMovies.filter((movie) => movie.duration <= SHORT_FILM_DURATION);
         setFoundSavedMovies(shortFilms);
         if (!shortFilms.length) setSearchError(errorConfig.errorNotFound);
       }
