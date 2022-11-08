@@ -21,12 +21,17 @@ export default function usePagination(array) {
     setWidthSize(clientWidth);
   };
 
+  function handleTimeResize() {
+    let timeId;
+    clearTimeout(timeId);
+    timeId = setTimeout(handleResize, 1000);
+  }
+
   useEffect(() => {
-    window.addEventListener('resize', () => {
-      setTimeout(handleResize, 1000);
-    });
+    handleTimeResize();
+    window.addEventListener('resize', handleTimeResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleTimeResize);
     };
   }, []);
 
