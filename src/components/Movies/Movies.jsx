@@ -58,6 +58,10 @@ function Movies({
           localStorage.setItem('moviesSearchString', searchString);
         }
         setSearchMovies(filteredMovies);
+        console.log(searchMovies);
+        if (isFiltered) {
+          setSearchMovies(filteredMovies.filter((movie) => movie.duration <= 40));
+        }
       } else {
         localStorage.setItem('searchMovies', JSON.stringify([]));
         localStorage.setItem('moviesSearchString', searchString);

@@ -56,7 +56,6 @@ function SavedMovies({ savedMovies, isLoading, handleToggleMovies }) {
     }
     localStorage.setItem('searchMoviesCheck', isChecked);
   };
-
   return (
     <section className="savedMovies">
       <SearchForm

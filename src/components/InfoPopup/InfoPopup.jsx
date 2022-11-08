@@ -19,6 +19,11 @@ const popupMap = {
     text: 'Данные успешно изменены',
     alt: 'Успешно',
   },
+  failureAddLike: {
+    src: popupFailure,
+    text: 'При постановке лайка произошла ошибка',
+    alt: 'Неудача',
+  },
 };
 
 function getPopup(type) {

@@ -49,10 +49,7 @@ export default function useMainApi() {
           return e;
         }
       })
-      .then((data) => data)
-      .catch((e) => {
-        console.log(e);
-      }),
+      .then((data) => data),
     updateUser: (email, name) => fetch(`${BASE_URL}/users/me`, {
       method: 'PATCH',
       headers: headers(),
@@ -68,10 +65,7 @@ export default function useMainApi() {
           return e;
         }
       })
-      .then((data) => data)
-      .catch((e) => {
-        console.log(e);
-      }),
+      .then((data) => data),
     addMovie: (movie) => fetch(`${BASE_URL}/movies`, {
       method: 'POST',
       headers: headers(),
@@ -99,10 +93,7 @@ export default function useMainApi() {
           return e;
         }
       })
-      .then((data) => data)
-      .catch((e) => {
-        console.log(e);
-      }),
+      .then((data) => data),
     getSavedMovies: () => fetch(`${BASE_URL}/movies`, {
       method: 'GET',
       headers: headers(),
@@ -117,10 +108,7 @@ export default function useMainApi() {
           return e;
         }
       })
-      .then((data) => data)
-      .catch((e) => {
-        console.log(e);
-      }),
+      .then((data) => data),
     deleteSavedMovies: (id) => fetch(`${BASE_URL}/movies/${id}`, {
       method: 'DELETE',
       headers: headers(),
@@ -136,8 +124,5 @@ export default function useMainApi() {
         }
       })
       .then((data) => data)
-      .catch((e) => {
-        console.log(e);
-      }),
   };
 }

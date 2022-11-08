@@ -25,7 +25,6 @@ const validRegConfig = {
 function Profile({ onUpdateUser, signOut, isLoading }) {
   const { name, email } = useContext(CurrentUserContext);
   const [isEditing, setIsEditing] = useState(false);
-
   useMemo(() => {
     initialValues.name = name;
     initialValues.email = email;

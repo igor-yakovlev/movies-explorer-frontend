@@ -159,10 +159,13 @@ function App() {
     } else {
       addMovie(movie)
         .then((res) => {
-          setSavedMovies((prevState) => [...prevState, res]);
+          if (res) {
+            setSavedMovies((prevState) => [...prevState, res]);
+          }
         })
         .catch((e) => {
           console.log(e);
+          setInfoPopupOption({ popupOpen: true, popupType: 'failureAddLike' });
         });
     }
   };

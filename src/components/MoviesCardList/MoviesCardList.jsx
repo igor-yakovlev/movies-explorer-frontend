@@ -5,14 +5,15 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import usePagination from '../../utils/usePagination';
 import MoviesButton from '../MoviesButton/MoviesButton';
 
-function MoviesCardList({ savedMovies = [], renderMoviesArr, handleToggleMovies }) {
+function MoviesCardList({
+  savedMovies = [], renderMoviesArr, handleToggleMovies,
+}) {
   const { handleSetPage, selectedMovies, hasNewPage } = usePagination(renderMoviesArr, 3);
   const { pathname } = useLocation();
-
   return (
     <>
       <ul className="moviesCardList">
-        {selectedMovies.map((movie) => (
+        {(pathname === '/saved-movies' ? renderMoviesArr : selectedMovies).map((movie) => (
           <MoviesCard
             savedMovies={savedMovies}
             key={pathname === '/saved-movies' ? movie._id : movie.id}

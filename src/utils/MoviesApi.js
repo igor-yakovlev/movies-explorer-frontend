@@ -16,6 +16,6 @@ export default function useMoviesData() {
           return e;
         }
       })
-      .then((data) => data),
+      .then((data) => data)
   };
 }
