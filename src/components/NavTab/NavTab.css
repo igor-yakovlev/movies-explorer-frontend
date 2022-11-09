@@ -1,0 +1,29 @@
+.navTab {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 96px);
+}
+
+.navTab__link {
+  padding: 10px 17px;
+  background: #E8E8E8;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 450px) {
+  .navTab {
+    gap: 6px;
+    grid-template-columns: repeat(3, 82px);
+  }
+  .navTab__link {
+    padding: 5px 15px;
+    font-size: 10px;
+    line-height: 16px;
+  }
+}

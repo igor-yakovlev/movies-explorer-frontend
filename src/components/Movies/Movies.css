@@ -1,0 +1,31 @@
+.movies {
+  flex-grow: 1;
+  margin: 0 70px;
+  padding-top: 70px;
+}
+
+.movies__line {
+  margin-top: 80px;
+}
+
+.movies__error-block {
+  text-align: center;
+}
+
+.movies__error-text {
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 830px) {
+  .movies {
+    margin: 0 30px;
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movies {
+    margin: 0 10px;
+    padding-top: 80px;
+  }
+}
